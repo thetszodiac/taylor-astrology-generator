@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taylor Swift × Astrology</title>
+<style>
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 30px 15px;
+    background: #f7f3f5;
+    color: #332d32;
+    font-family: Georgia, "Times New Roman", serif;
+}
+.generator {
+    max-width: 650px;
+    margin: auto;
+}
+h1 {
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+.intro {
+    text-align: center;
+    color: #756d73;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 35px;
+}
+.choices {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+.choice label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #cfc5cc;
+    border-radius: 7px;
+    background: white;
+    color: #332d32;
+    font-family: Georgia, serif;
+    font-size: 15px;
+}
+.generate {
+    display: block;
+    margin: 0 auto 35px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 7px;
+    background: #332d32;
+    color: white;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    cursor: pointer;
+}
+.generate:hover {
+    opacity: 0.85;
+}
+#results {
+    display: none;
+}
+.result {
+    background: white;
+    border: 1px solid #e1d9de;
+    border-radius: 9px;
+    padding: 22px;
+    margin-bottom: 15px;
+}
+.result h2 {
+    margin: 0 0 15px;
+    font-size: 20px;
+}
+.song {
+    line-height: 1.8;
+}
+.footer {
+    text-align: center;
+    color: #8a8187;
+    font-size: 13px;
+    margin-top: 30px;
+}
+@media (max-width: 600px) {
+    .choices {
+        grid-template-columns: 1fr;
+    }
+    h1 {
+        font-size: 25px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="generator">
+<h1>✨ Taylor Swift × Astrology ✨</h1>
+<p class="intro">
+Choose your Sun, Rising and Moon signs to discover the Taylor Swift songs assigned to your Big Three.
+</p>
+<div class="choices">
+<div class="choice">
+<label for="sun">☀️ Sun</label>
+<select id="sun">
+<option value="">Choose a sign</option>
+<option>Aries</option>
+<option>Taurus</option>
+<option>Gemini</option>
+<option>Cancer</option>
+<option>Leo</option>
+<option>Virgo</option>
+<option>Libra</option>
+<option>Scorpio</option>
+<option>Sagittarius</option>
+<option>Capricorn</option>
+<option>Aquarius</option>
+<option>Pisces</option>
+</select>
+</div>
+<div class="choice">
+<label for="rising">🌅 Rising</label>
+<select id="rising">
+<option value="">Choose a sign</option>
+<option>Aries</option>
+<option>Taurus</option>
+<option>Gemini</option>
+<option>Cancer</option>
+<option>Leo</option>
+<option>Virgo</option>
+<option>Libra</option>
+<option>Scorpio</option>
+<option>Sagittarius</option>
+<option>Capricorn</option>
+<option>Aquarius</option>
+<option>Pisces</option>
+</select>
+</div>
+<div class="choice">
+<label for="moon">🌙 Moon</label>
+<select id="moon">
+<option value="">Choose a sign</option>
+<option>Aries</option>
+<option>Taurus</option>
+<option>Gemini</option>
+<option>Cancer</option>
+<option>Leo</option>
+<option>Virgo</option>
+<option>Libra</option>
+<option>Scorpio</option>
+<option>Sagittarius</option>
+<option>Capricorn</option>
+<option>Aquarius</option>
+<option>Pisces</option>
+</select>
+</div>
+</div>
+<button class="generate" onclick="generateSongs()">
+Generate My Songs ✨
+</button>
+<div id="results">
+<div class="result">
+<h2 id="sunTitle"></h2>
+<div class="song" id="sunSongs"></div>
+</div>
+<div class="result">
+<h2 id="risingTitle"></h2>
+<div class="song" id="risingSongs"></div>
+</div>
+<div class="result">
+<h2 id="moonTitle"></h2>
+<div class="song" id="moonSongs"></div>
+</div>
+</div>
+<p class="footer">
+Taylor Swift × Astrology
+</p>
+</div>
+<script>
+const songs = {
+Aries: {
+Sun: [
+"The Man",
+"I Did Something Bad",
+"But Daddy I Love Him",
+"Picture To Burn",
+"Actually Romantic"
+],
+Rising: [
+"Blank Space",
+"Sparks Fly",
+"closure",
+"Cassandra"
+],
+Moon: [
+"The Way I Loved You",
+"Treacherous",
+"The Great War",
+"my tears ricochet"
+]
+},
+Taurus: {
+Sun: [
+"Timeless",
+"King of My Heart",
+"peace",
+"Paper Rings",
+"Wi$h Li$t"
+],
+Rising: [
+"Mary’s Song",
+"Hey Stephen",
+"Begin Again",
+"Sweet Nothing"
+],
+Moon: [
+"All You Had To Do Was Stay",
+"Guilty As Sin?",
+"ivy",
+"The Prophecy"
+]
+},
+Gemini: {
+Sun: [
+"Wonderland",
+"The Tortured Poets Department",
+"Getaway Car",
+"imgonnagetyouback",
+"long story short"
+],
+Rising: [
+"Cruel Summer",
+"The Other Side Of The Door",
+"Holy Ground",
+"Stay Beautiful"
+],
+Moon: [
+"Hits Different",
+"the 1",
+"Speak Now",
+"Wood"
+]
+},
+Cancer: {
+Sun: [
+"cardigan",
+"Cornelia Street",
+"You Are In Love",
+"Tim McGraw",
+"Call It What You Want"
+],
+Rising: [
+"Fifteen",
+"Honey",
+"tis the damn season",
+"The Smallest Man Who Ever Lived"
+],
+Moon: [
+"Last Kiss",
+"Sad Beautiful Tragic",
+"Maroon",
+"Peter"
+]
+},
+Leo: {
+Sun: [
+"Bejeweled",
+"The Life Of A Showgirl",
+"The Lucky One",
+"I Can Do It With A Broken Heart",
+"the last great american dynasty"
+],
+Rising: [
+"Wildest Dreams",
+"I Think He Knows",
+"Delicate",
+"Mean"
+],
+Moon: [
+"Invisible",
+"You Belong With Me",
+"champagne problems",
+"The Albatross"
+]
+},
+Virgo: {
+Sun: [
+"Anti-Hero",
+"this is me trying",
+"Afterglow",
+"The Story of Us",
+"Eldest Daughter"
+],
+Rising: [
+"Tied Together With A Smile",
+"Tell Me Why",
+"Out Of The Woods",
+"Dancing With Our Hands Tied"
+],
+Moon: [
+"right where you left me",
+"How Did It End?",
+"I Almost Do",
+"My Boy Only Breaks His Favourite Toys"
+]
+},
+Libra: {
+Sun: [
+"Enchanted",
+"I’m Only Me When I’m With You",
+"Dress",
+"Everything Has Changed",
+"happiness"
+],
+Rising: [
+"mirrorball",
+"Paris",
+"“Slut!”",
+"Elizabeth Taylor"
+],
+Moon: [
+"White Horse",
+"Death By A Thousand Cuts",
+"Fresh Out The Slammer",
+"The Manuscript"
+]
+},
+Scorpio: {
+Sun: [
+"Who’s Afraid of Little Old Me?",
+"Don’t Blame Me",
+"mad woman",
+"willow",
+"False God"
+],
+Rising: [
+"I Know Places",
+"CANCELLED!",
+"You’re Not Sorry",
+"Should’ve Said No"
+],
+Moon: [
+"Would’ve",
+"Could’ve",
+"Should’ve",
+"Haunted",
+"The Black Dog",
+"Red"
+]
+},
+Sagittarius: {
+Sun: [
+"A Place In This World",
+"Fearless",
+"New Romantics",
+"State of Grace",
+"Long Live"
+],
+Rising: [
+"…Ready For It?",
+"Florida!!!",
+"The Bolter",
+"Karma"
+],
+Moon: [
+"The Archer",
+"cowboy like me",
+"august",
+"Opalite"
+]
+},
+Capricorn: {
+Sun: [
+"You’re On Your Own, Kid",
+"this is me trying",
+"Clean",
+"Father Figure",
+"thanK you aIMee"
+],
+Rising: [
+"Cold As You",
+"Dear John",
+"This Is Why We Can’t Have Nice Things",
+"Miss Americana & The Heartbreak Prince"
+],
+Moon: [
+"Forever & Always",
+"The Moment I Knew",
+"tolerate it",
+"So Long, London"
+]
+},
+Aquarius: {
+Sun: [
+"Change",
+"The Outside",
+"You Need To Calm Down",
+"Look What You Made Me Do",
+"The Fate of Ophelia"
+],
+Rising: [
+"Dear Reader",
+"Now That We Don’t Talk",
+"Girl At Home",
+"it’s time to go"
+],
+Moon: [
+"hoax",
+"Innocent",
+"Down Bad",
+"Chloe or Sam or Sophia or Marcus"
+]
+},
+Pisces: {
+Sun: [
+"Daylight",
+"This Love",
+"the lakes",
+"New Year’s Day",
+"I Hate It Here"
+],
+Rising: [
+"Teardrops On My Guitar",
+"Snow On The Beach",
+"Ruin The Friendship",
+"coney island"
+],
+Moon: [
+"Breathe",
+"Back To December",
+"The Last Time",
+"loml"
+]
+}
+};
+function generateSongs() {
+const sun = document.getElementById("sun").value;
+const rising = document.getElementById("rising").value;
+const moon = document.getElementById("moon").value;
+if (!sun || !rising || !moon) {
+alert("Please choose your Sun, Rising and Moon signs.");
+return;
+}
+document.getElementById("sunTitle").textContent =
+"☀️ " + sun + " Sun";
+document.getElementById("risingTitle").textContent =
+"🌅 " + rising + " Rising";
+document.getElementById("moonTitle").textContent =
+"🌙 " + moon + " Moon";
+document.getElementById("sunSongs").innerHTML =
+songs[sun].Sun.map(song => "• " + song).join("<br>");
+document.getElementById("risingSongs").innerHTML =
+songs[rising].Rising.map(song => "• " + song).join("<br>");
+document.getElementById("moonSongs").innerHTML =
+songs[moon].Moon.map(song => "• " + song).join("<br>");
+document.getElementById("results").style.display = "block";
+}
+</script>
+</body>
+</html>
