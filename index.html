@@ -8,7 +8,6 @@
 * {
     box-sizing: border-box;
 }
-
 body {
     margin: 0;
     padding: 45px 20px;
@@ -17,12 +16,10 @@ body {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 15px;
 }
-
 .generator {
     max-width: 620px;
     margin: 0 auto;
 }
-
 /* Main title */
 h1 {
     text-align: center;
@@ -32,7 +29,6 @@ h1 {
     margin: 0 0 14px;
     color: #4a4240;
 }
-
 /* Introduction */
 .intro {
     max-width: 540px;
@@ -42,7 +38,6 @@ h1 {
     font-style: italic;
     line-height: 1.75;
 }
-
 /* Dropdown section */
 .choices {
     display: grid;
@@ -50,7 +45,6 @@ h1 {
     gap: 18px;
     margin-bottom: 28px;
 }
-
 .choice label {
     display: block;
     margin-bottom: 8px;
@@ -59,7 +53,6 @@ h1 {
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
-
 /* Dropdowns */
 select {
     width: 100%;
@@ -72,12 +65,10 @@ select {
     font-size: 14px;
     cursor: pointer;
 }
-
 select:focus {
     outline: none;
     border-color: #9b8d86;
 }
-
 /* Generate button */
 .generate {
     display: block;
@@ -93,17 +84,14 @@ select:focus {
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
 .generate:hover {
     background: #514844;
     color: #fffdfa;
 }
-
 /* Results */
 #results {
     display: none;
 }
-
 .result {
     background: transparent;
     border-top: 1px solid #d8d0ca;
@@ -111,11 +99,9 @@ select:focus {
     padding: 23px 5px 25px;
     margin-bottom: 0;
 }
-
 .result:last-child {
     border-bottom: 1px solid #d8d0ca;
 }
-
 .result h2 {
     margin: 0 0 14px;
     color: #4a4240;
@@ -123,13 +109,11 @@ select:focus {
     font-weight: normal;
     letter-spacing: 0.5px;
 }
-
 .song {
     color: #665d59;
     line-height: 1.9;
     padding-left: 3px;
 }
-
 /* Footer */
 .footer {
     text-align: center;
@@ -138,26 +122,21 @@ select:focus {
     letter-spacing: 0.5px;
     margin-top: 35px;
 }
-
 /* Mobile */
 @media (max-width: 600px) {
     body {
         padding: 32px 18px;
     }
-
     .choices {
         grid-template-columns: 1fr;
         gap: 15px;
     }
-
     h1 {
         font-size: 24px;
     }
-
     .intro {
         margin-bottom: 30px;
     }
-
     .generate {
         margin-bottom: 35px;
     }
@@ -166,13 +145,13 @@ select:focus {
 </head>
 <body>
 <div class="generator">
-<h1>✨ Taylor Swift × Astrology ✨</h1>
+<h1>The TS Zodiac</h1>
 <p class="intro">
-Choose your Sun, Rising and Moon signs to discover the Taylor Swift songs assigned to your Big Three.
+Select your Sun, Rising and Moon signs to discover the Taylor Swift songs assigned to your Big Three.
 </p>
 <div class="choices">
 <div class="choice">
-<label for="sun">☀️ Sun</label>
+<label for="sun">Sun</label>
 <select id="sun">
 <option value="">Choose a sign</option>
 <option>Aries</option>
@@ -190,7 +169,7 @@ Choose your Sun, Rising and Moon signs to discover the Taylor Swift songs assign
 </select>
 </div>
 <div class="choice">
-<label for="rising">🌅 Rising</label>
+<label for="rising">Rising</label>
 <select id="rising">
 <option value="">Choose a sign</option>
 <option>Aries</option>
@@ -208,7 +187,7 @@ Choose your Sun, Rising and Moon signs to discover the Taylor Swift songs assign
 </select>
 </div>
 <div class="choice">
-<label for="moon">🌙 Moon</label>
+<label for="moon">Moon</label>
 <select id="moon">
 <option value="">Choose a sign</option>
 <option>Aries</option>
@@ -227,7 +206,7 @@ Choose your Sun, Rising and Moon signs to discover the Taylor Swift songs assign
 </div>
 </div>
 <button class="generate" onclick="generateSongs()">
-Generate My Songs ✨
+Generate My Songs
 </button>
 <div id="results">
 <div class="result">
@@ -411,7 +390,7 @@ Rising: [
 "Should’ve Said No"
 ],
 Moon: [
-"Would’ve Could've Should've",
+"Would’ve Could've Should’ve",
 "Haunted",
 "The Black Dog",
 "Red"
@@ -511,17 +490,25 @@ alert("Please choose your Sun, Rising and Moon signs.");
 return;
 }
 document.getElementById("sunTitle").textContent =
-"☀️ " + sun + " Sun";
+sun + " Sun";
 document.getElementById("risingTitle").textContent =
-"🌅 " + rising + " Rising";
+rising + " Rising";
 document.getElementById("moonTitle").textContent =
-"🌙 " + moon + " Moon";
-document.getElementById("sunSongs").innerHTML =
-songs[sun].Sun.map(song => "• " + song).join("<br>");
-document.getElementById("risingSongs").innerHTML =
-songs[rising].Rising.map(song => "• " + song).join("<br>");
-document.getElementById("moonSongs").innerHTML =
-songs[moon].Moon.map(song => "• " + song).join("<br>");
+moon + " Moon";
+/* Randomly select one song from each list */
+const randomSun =
+songs[sun].Sun[Math.floor(Math.random() * songs[sun].Sun.length)];
+const randomRising =
+songs[rising].Rising[Math.floor(Math.random() * songs[rising].Rising.length)];
+const randomMoon =
+songs[moon].Moon[Math.floor(Math.random() * songs[moon].Moon.length)];
+/* Display the selected songs */
+document.getElementById("sunSongs").textContent =
+randomSun;
+document.getElementById("risingSongs").textContent =
+randomRising;
+document.getElementById("moonSongs").textContent =
+randomMoon;
 document.getElementById("results").style.display = "block";
 }
 </script>
