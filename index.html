@@ -8,6 +8,7 @@
 * {
     box-sizing: border-box;
 }
+
 body {
     margin: 0;
     padding: 45px 20px;
@@ -16,10 +17,12 @@ body {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 15px;
 }
+
 .generator {
     max-width: 620px;
     margin: 0 auto;
 }
+
 /* Main title */
 h1 {
     text-align: center;
@@ -29,6 +32,7 @@ h1 {
     margin: 0 0 14px;
     color: #4a4240;
 }
+
 /* Introduction */
 .intro {
     max-width: 540px;
@@ -38,6 +42,7 @@ h1 {
     font-style: italic;
     line-height: 1.75;
 }
+
 /* Dropdown section */
 .choices {
     display: grid;
@@ -45,6 +50,7 @@ h1 {
     gap: 18px;
     margin-bottom: 28px;
 }
+
 .choice label {
     display: block;
     margin-bottom: 8px;
@@ -53,6 +59,7 @@ h1 {
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
+
 /* Dropdowns */
 select {
     width: 100%;
@@ -65,10 +72,12 @@ select {
     font-size: 14px;
     cursor: pointer;
 }
+
 select:focus {
     outline: none;
     border-color: #9b8d86;
 }
+
 /* Generate button */
 .generate {
     display: block;
@@ -84,14 +93,17 @@ select:focus {
     cursor: pointer;
     transition: all 0.2s ease;
 }
+
 .generate:hover {
     background: #514844;
     color: #fffdfa;
 }
+
 /* Results */
 #results {
     display: none;
 }
+
 .result {
     background: transparent;
     border-top: 1px solid #d8d0ca;
@@ -99,9 +111,11 @@ select:focus {
     padding: 23px 5px 25px;
     margin-bottom: 0;
 }
+
 .result:last-child {
     border-bottom: 1px solid #d8d0ca;
 }
+
 .result h2 {
     margin: 0 0 14px;
     color: #4a4240;
@@ -109,11 +123,13 @@ select:focus {
     font-weight: normal;
     letter-spacing: 0.5px;
 }
+
 .song {
     color: #665d59;
     line-height: 1.9;
     padding-left: 3px;
 }
+
 /* Footer */
 .footer {
     text-align: center;
@@ -122,21 +138,26 @@ select:focus {
     letter-spacing: 0.5px;
     margin-top: 35px;
 }
+
 /* Mobile */
 @media (max-width: 600px) {
     body {
         padding: 32px 18px;
     }
+
     .choices {
         grid-template-columns: 1fr;
         gap: 15px;
     }
+
     h1 {
         font-size: 24px;
     }
+
     .intro {
         margin-bottom: 30px;
     }
+
     .generate {
         margin-bottom: 35px;
     }
