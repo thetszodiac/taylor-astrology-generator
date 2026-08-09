@@ -69,10 +69,16 @@ select:focus {
     outline: none;
     border-color: #9b8d86;
 }
+/* Generate button wrapper */
+.generate-wrapper {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto 42px;
+}
 /* Generate button */
 .generate {
     display: block;
-    margin: 0 auto 42px;
+    margin: 0;
     padding: 11px 25px;
     border: 1px solid #8f817a;
     border-radius: 2px;
@@ -88,10 +94,35 @@ select:focus {
     background: #514844;
     color: #fffdfa;
 }
-/* Results card */
+/* Sparkles around generate button */
+.sparkle {
+    position: absolute;
+    pointer-events: none;
+    color: #9a908b;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    opacity: 0;
+    animation: sparkleButton 1.2s ease-out forwards;
+}
+@keyframes sparkleButton {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(4px);
+    }
+    20% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.7) translateY(-14px);
+    }
+}
+/* Results */
 #results {
     display: none;
 }
+/* Results card */
 .results-card {
     position: relative;
     width: 100%;
@@ -103,9 +134,8 @@ select:focus {
     outline: 1px solid #e5ddd7;
     outline-offset: 5px;
     text-align: center;
-    overflow: visible;
 }
-/* Card entrance animation */
+/* Soft card entrance */
 .results-card.show {
     animation: cardAppear 0.6s ease-out;
 }
@@ -117,29 +147,6 @@ select:focus {
     100% {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-/* Sparkles */
-.sparkle {
-    position: absolute;
-    pointer-events: none;
-    color: #9a908b;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 16px;
-    animation: sparkleFloat 1.2s ease-out forwards;
-}
-@keyframes sparkleFloat {
-    0% {
-        opacity: 0;
-        transform: scale(0.5) translateY(5px);
-    }
-    25% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.7) translateY(-12px);
     }
 }
 /* Results card title */
@@ -218,7 +225,7 @@ select:focus {
     .intro {
         margin-bottom: 30px;
     }
-    .generate {
+    .generate-wrapper {
         margin-bottom: 38px;
     }
     .results-card {
@@ -241,7 +248,9 @@ Select your Sun, Rising and Moon signs to discover the Taylor Swift songs assign
 </p>
 <div class="choices">
 <div class="choice">
-<label for="sun">Sun</label>
+
+Sun
+
 <select id="sun">
 <option value="">select</option>
 <option>Aries</option>
@@ -259,7 +268,9 @@ Select your Sun, Rising and Moon signs to discover the Taylor Swift songs assign
 </select>
 </div>
 <div class="choice">
-<label for="rising">Rising</label>
+
+Rising
+
 <select id="rising">
 <option value="">select</option>
 <option>Aries</option>
@@ -277,7 +288,9 @@ Select your Sun, Rising and Moon signs to discover the Taylor Swift songs assign
 </select>
 </div>
 <div class="choice">
-<label for="moon">Moon</label>
+
+Moon
+
 <select id="moon">
 <option value="">select</option>
 <option>Aries</option>
@@ -295,9 +308,11 @@ Select your Sun, Rising and Moon signs to discover the Taylor Swift songs assign
 </select>
 </div>
 </div>
+<div class="generate-wrapper">
 <button class="generate" onclick="generateSongs()">
 generate 🫶
 </button>
+</div>
 <div id="results">
 <div class="results-card">
 <div class="results-heading">
@@ -316,7 +331,7 @@ My Taylor Swift Big Three
 <div class="song" id="moonSongs"></div>
 </div>
 <div class="card-footer">
-generator by thetszodiac.tumblr.com
+by thetszodiac.tumblr.com
 </div>
 </div>
 </div>
@@ -611,26 +626,28 @@ randomMoon;
 const results = document.getElementById("results");
 const card = document.querySelector(".results-card");
 results.style.display = "block";
-/* Restart the card animation */
+/* Restart the card entrance animation */
 card.classList.remove("show");
 void card.offsetWidth;
 card.classList.add("show");
-/* Remove any previous sparkles */
+/* Remove previous sparkles */
 document.querySelectorAll(".sparkle").forEach(sparkle => sparkle.remove());
-/* Create subtle sparkles */
+/* Create subtle sparkles around the generate button */
+const buttonWrapper = document.querySelector(".generate-wrapper");
 const sparklePositions = [
-    { top: "12%", left: "-10px", symbol: "✦" },
-    { top: "35%", right: "-12px", symbol: "✧" },
-    { top: "68%", left: "-13px", symbol: "·" },
-    { top: "82%", right: "-10px", symbol: "✦" }
+    { top: "-12px", left: "-15px", symbol: "✦" },
+    { top: "-15px", right: "-14px", symbol: "✧" },
+    { bottom: "-10px", left: "5px", symbol: "·" },
+    { bottom: "-12px", right: "4px", symbol: "✦" }
 ];
 sparklePositions.forEach((position, index) => {
     const sparkle = document.createElement("span");
     sparkle.className = "sparkle";
     sparkle.textContent = position.symbol;
     Object.assign(sparkle.style, position);
-    sparkle.style.animationDelay = (index * 0.12) + "s";
-    card.appendChild(sparkle);
+    sparkle.style.animationDelay =
+        (index * 0.12) + "s";
+    buttonWrapper.appendChild(sparkle);
 });
 }
 </script>
