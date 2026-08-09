@@ -88,33 +88,67 @@ select:focus {
     background: #514844;
     color: #fffdfa;
 }
-/* Results */
+/* Results card */
 #results {
     display: none;
 }
-.result {
-    background: transparent;
-    border-top: 1px solid #d8d0ca;
-    border-radius: 0;
-    padding: 23px 5px 25px;
-    margin-bottom: 0;
+.results-card {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 34px 30px 30px;
+    background: #fffdfa;
+    border: 1px solid #cfc6c0;
+    outline: 1px solid #e5ddd7;
+    outline-offset: 5px;
+    text-align: center;
 }
-.result:last-child {
-    border-bottom: 1px solid #d8d0ca;
-}
-.result h2 {
-    margin: 0 0 14px;
+/* Results card title */
+.results-heading {
+    margin: 0 0 28px;
     color: #4a4240;
     font-size: 18px;
     font-weight: normal;
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+/* Individual result */
+.result {
+    padding: 20px 0;
+    border-top: 1px solid #ded6d0;
+}
+.result:last-of-type {
+    border-bottom: 1px solid #ded6d0;
+}
+.result h2 {
+    margin: 0 0 9px;
+    color: #7a706c;
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 .song {
-    color: #665d59;
-    line-height: 1.9;
-    padding-left: 3px;
+    color: #403936;
+    font-size: 17px;
+    line-height: 1.5;
 }
-/* Footer */
+/* Card footer */
+.card-footer {
+    margin-top: 25px;
+    color: #9a908b;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+}
+.card-footer a {
+    color: #9a908b;
+    text-decoration: none;
+    border-bottom: 1px solid #d1c8c2;
+}
+.card-footer a:hover {
+    color: #514844;
+}
+/* Main footer */
 .footer {
     text-align: center;
     color: #9a908b;
@@ -138,16 +172,25 @@ select:focus {
         margin-bottom: 30px;
     }
     .generate {
-        margin-bottom: 35px;
+        margin-bottom: 38px;
+    }
+    .results-card {
+        padding: 30px 22px 26px;
+    }
+    .results-heading {
+        font-size: 16px;
+    }
+    .song {
+        font-size: 16px;
     }
 }
 </style>
 </head>
 <body>
 <div class="generator">
-<h1>✨ The TS Zodiac 🌙</h1>
+<h1>Taylor Swift × Astrology</h1>
 <p class="intro">
-Select your Sun, Rising and Moon signs to discover the Taylor Swift songs assigned to your Big Three placements. If you don't like your results, press generate again!
+Choose your Sun, Rising and Moon signs to discover the Taylor Swift songs assigned to your Big Three.
 </p>
 <div class="choices">
 <div class="choice">
@@ -206,9 +249,13 @@ Select your Sun, Rising and Moon signs to discover the Taylor Swift songs assign
 </div>
 </div>
 <button class="generate" onclick="generateSongs()">
-generate 🫶🏻
+generate 🫶
 </button>
 <div id="results">
+<div class="results-card">
+<div class="results-heading">
+Your Taylor Big Three
+</div>
 <div class="result">
 <h2 id="sunTitle"></h2>
 <div class="song" id="sunSongs"></div>
@@ -221,9 +268,13 @@ generate 🫶🏻
 <h2 id="moonTitle"></h2>
 <div class="song" id="moonSongs"></div>
 </div>
+<div class="card-footer">
+<a href="https://thetszodiac.tumblr.com/" target="_blank">thetszodiac.tumblr.com</a>
+</div>
+</div>
 </div>
 <p class="footer">
-Back to <a href="https://thetszodiac.tumblr.com/" target="_blank">The TS Zodiac</a>
+Taylor Swift × Astrology
 </p>
 </div>
 <script>
@@ -486,7 +537,7 @@ const sun = document.getElementById("sun").value;
 const rising = document.getElementById("rising").value;
 const moon = document.getElementById("moon").value;
 if (!sun || !rising || !moon) {
-alert("Please choose your Sun, Rising and Moon signs.");
+alert("Please select your Sun, Rising and Moon signs");
 return;
 }
 document.getElementById("sunTitle").textContent =
