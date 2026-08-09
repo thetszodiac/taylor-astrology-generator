@@ -93,6 +93,7 @@ select:focus {
     display: none;
 }
 .results-card {
+    position: relative;
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
@@ -102,6 +103,44 @@ select:focus {
     outline: 1px solid #e5ddd7;
     outline-offset: 5px;
     text-align: center;
+    overflow: visible;
+}
+/* Card entrance animation */
+.results-card.show {
+    animation: cardAppear 0.6s ease-out;
+}
+@keyframes cardAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Sparkles */
+.sparkle {
+    position: absolute;
+    pointer-events: none;
+    color: #9a908b;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    animation: sparkleFloat 1.2s ease-out forwards;
+}
+@keyframes sparkleFloat {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(5px);
+    }
+    25% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.7) translateY(-12px);
+    }
 }
 /* Results card title */
 .results-heading {
@@ -155,6 +194,14 @@ select:focus {
     font-size: 12px;
     letter-spacing: 0.5px;
     margin-top: 35px;
+}
+.footer a {
+    color: #9a908b;
+    text-decoration: none;
+    border-bottom: 1px solid #d1c8c2;
+}
+.footer a:hover {
+    color: #514844;
 }
 /* Mobile */
 @media (max-width: 600px) {
@@ -560,7 +607,31 @@ document.getElementById("risingSongs").textContent =
 randomRising;
 document.getElementById("moonSongs").textContent =
 randomMoon;
-document.getElementById("results").style.display = "block";
+/* Show the results */
+const results = document.getElementById("results");
+const card = document.querySelector(".results-card");
+results.style.display = "block";
+/* Restart the card animation */
+card.classList.remove("show");
+void card.offsetWidth;
+card.classList.add("show");
+/* Remove any previous sparkles */
+document.querySelectorAll(".sparkle").forEach(sparkle => sparkle.remove());
+/* Create subtle sparkles */
+const sparklePositions = [
+    { top: "12%", left: "-10px", symbol: "✦" },
+    { top: "35%", right: "-12px", symbol: "✧" },
+    { top: "68%", left: "-13px", symbol: "·" },
+    { top: "82%", right: "-10px", symbol: "✦" }
+];
+sparklePositions.forEach((position, index) => {
+    const sparkle = document.createElement("span");
+    sparkle.className = "sparkle";
+    sparkle.textContent = position.symbol;
+    Object.assign(sparkle.style, position);
+    sparkle.style.animationDelay = (index * 0.12) + "s";
+    card.appendChild(sparkle);
+});
 }
 </script>
 </body>
