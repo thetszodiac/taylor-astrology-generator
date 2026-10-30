@@ -209,7 +209,7 @@ footer a { color: var(--accent); }
   </p>
 
   <label for="sun">Sun sign <span class="required">(required)</span></label>
-  <select id="sun" name="sun" required>
+  <select id="sun" name="sun">
     <option value="">select</option>
     <option>Aries</option>
     <option>Taurus</option>
@@ -538,8 +538,8 @@ albums.forEach((album, index) => {
 const sunSign = document.getElementById("sun");
 
 if (!sunSign.value) {
-  sunSign.setCustomValidity("Please select your Sun sign before submitting!");
-  sunSign.reportValidity();
+  alert("Please select your Sun sign before submitting!");
+  sunSign.focus();
   return;
 }
 
