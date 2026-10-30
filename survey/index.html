@@ -84,6 +84,9 @@ label {
   color: var(--muted);
   font-weight: normal;
 }
+.required {
+  font-weight: normal;
+}
 select {
   width: 100%;
   padding: 12px;
@@ -185,11 +188,11 @@ footer a { color: var(--accent); }
 <div class="container">
 
 <header>
-  <div class="brand">The TS Zodiac</div>
+  <div class="brand">✨The TS Zodiac✨</div>
   <h1>The Taylor Swift<br>Zodiac survey</h1>
   <div class="subtitle">A cosmic investigation into musical taste.</div>
   <p class="intro">
-    What does the zodiac say about their Taylor Swift
+    What do the signs say about their Taylor Swift
     favourites? We're collecting data from Swifties across
     the zodiac to find out.
   </p>
@@ -201,10 +204,10 @@ footer a { color: var(--accent); }
   <h2 class="section-title">Your birth chart</h2>
   <p class="section-description">
     Tell us a little about your astrological placements.
-    Your Sun sign is required, rising and moon signs are optional.
+    Your Sun sign is required, moon/rising signs are optional.
   </p>
 
-  <label for="sun">Sun sign (required)</label>
+  <label for="sun">Sun sign <span class="required">(required)</span></label>
   <select id="sun" name="sun" required>
     <option value="">select</option>
     <option>Aries</option>
