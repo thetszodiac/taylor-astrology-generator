@@ -113,6 +113,14 @@ select {
   font-weight: normal;
   font-size: 16px;
 }
+.album-lyric {
+  font-family: Georgia, serif;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--muted);
+  margin: 4px 0 0;
+  line-height: 1.5;
+}
 button {
   font-family: Georgia, serif;
   border: 1px solid var(--accent);
@@ -254,6 +262,7 @@ footer a { color: var(--accent); }
 const albums = [
   {
     name: "Taylor Swift",
+    lyric: "I’ll still look at you like the stars that shine in the sky...",
     songs: [
       "Tim McGraw", "Picture to Burn",
       "Teardrops on My Guitar", "A Place in This World",
@@ -266,6 +275,7 @@ const albums = [
   },
   {
     name: "Fearless",
+    lyric: "You’ve got a smile that takes me to another planet...",
     songs: [
       "Fearless", "Fifteen", "Love Story",
       "Hey Stephen", "White Horse",
@@ -283,6 +293,7 @@ const albums = [
   },
   {
     name: "Speak Now",
+    lyric: "I was thinking just one time, maybe the stars align...",
     songs: [
       "Mine", "Sparks Fly", "Back to December",
       "Speak Now", "Dear John", "Mean",
@@ -297,6 +308,7 @@ const albums = [
   },
   {
     name: "Red",
+    lyric: "Up in your room and our slates are clean, just twin fire signs...",
     songs: [
       "State of Grace", "Red", "Treacherous",
       "I Knew You Were Trouble", "All Too Well",
@@ -316,6 +328,7 @@ const albums = [
   },
 {
   name: "1989",
+  lyric: "I had the fantasy that maybe our mismatched star signs would surprise the whole school...",
   songs: [
     "Welcome to New York",
     "Blank Space",
@@ -336,6 +349,7 @@ const albums = [
   },
   {
     name: "Reputation",
+    lyric: "Starry eyes sparking up my darkest night...",
     songs: [
       "...Ready for It?", "End Game", "I Did Something Bad",
       "Don't Blame Me", "Delicate", "Look What You Made Me Do",
@@ -347,6 +361,7 @@ const albums = [
   },
   {
   name: "Lover",
+  lyric: "Stars all aligned, and they intertwined...",
   songs: [
     "I Forgot That You Existed",
     "Cruel Summer",
@@ -365,6 +380,7 @@ const albums = [
   },
   {
     name: "folklore",
+    lyric: "Love you to the moon and to Saturn...",
     songs: [
       "the 1", "cardigan", "the last great american dynasty",
       "exile", "my tears ricochet", "mirrorball",
@@ -376,6 +392,7 @@ const albums = [
   },
   {
     name: "evermore",
+    lyric: "You’re a bandit like me, eyes full of stars...",
     songs: [
       "willow", "champagne problems", "gold rush",
       "'tis the damn season", "tolerate it",
@@ -388,6 +405,7 @@ const albums = [
   },
   {
   name: "Midnights",
+  lyric: "Once upon a time, the planets and the fates and all the stars aligned...",
   songs: [
     "Lavender Haze",
     "Maroon",
@@ -416,6 +434,7 @@ const albums = [
   },
   {
   name: "The Tortured Poets Department",
+  lyric: "For a moment I knew cosmic love...",
   songs: [
     "Fortnight",
     "The Tortured Poets Department",
@@ -437,6 +456,7 @@ const albums = [
   },
   {
     name: "The Anthology",
+    lyric: "And the stars are stunning...",
     songs: [
       "The Black Dog",
       "imgonnagetyouback",
@@ -457,6 +477,7 @@ const albums = [
   },
   {
     name: "The Life of a Showgirl",
+    lyric: "I made wishes on all of the stars...",
     songs: [
       "The Fate of Ophelia",
       "Elizabeth Taylor",
@@ -481,20 +502,24 @@ const albums = [
 const albumList = document.getElementById("albumList");
 
 albums.forEach((album, index) => {
-  const wrapper = document.createElement("div");
-  wrapper.className = "album-card";
+const wrapper = document.createElement("div");
+wrapper.className = "album-card";
 
-  const info = document.createElement("div");
-  info.className = "album-info";
+const info = document.createElement("div");
+info.className = "album-info";
 
-  const title = document.createElement("strong");
-  title.textContent = "✨ " + album.name;
-  
-  const select = document.createElement("select");
-  select.name = "album_" + index;
-  select.setAttribute("aria-label", album.name);
+const title = document.createElement("strong");
+title.textContent = "✨ " + album.name;
 
-  const placeholder = document.createElement("option");
+const lyric = document.createElement("p");
+lyric.className = "album-lyric";
+lyric.textContent = album.lyric;
+
+const select = document.createElement("select");
+select.name = "album_" + index;
+select.setAttribute("aria-label", album.name);
+
+const placeholder = document.createElement("option");
   placeholder.value = "";
   placeholder.textContent = "select";
   select.appendChild(placeholder);
@@ -507,7 +532,8 @@ albums.forEach((album, index) => {
   });
 
   info.appendChild(title);
-  wrapper.appendChild(info);
+info.appendChild(lyric);
+wrapper.appendChild(info);
   wrapper.appendChild(select);
   albumList.appendChild(wrapper);
 });
@@ -592,7 +618,7 @@ sparklePositions.forEach((position, index) => {
 </div>
 
 <p style="font-size:12px; color:#8b807b; margin-top:18px; line-height:1.5;">
-  Privacy note: your responses are anonymous. We do not collect names, email addresses or locations.
+  Privacy note: this survey does not ask for or record names, email addresses or locations. Responses are collected anonymously.
 </p>
 
 </div>
