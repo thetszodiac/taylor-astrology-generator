@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Taylor Swift Zodiac Project | The TS Zodiac</title>
+<title>The TS Zodiac survey</title>
 <style>
 :root {
   --bg: #f8f5f0;
@@ -21,7 +21,7 @@ body {
   padding: 28px 16px 60px;
   background: var(--bg);
   color: var(--text);
-  font-family: Arial, sans-serif;
+  font-family: Georgia, serif;
   line-height: 1.6;
 }
 .container {
@@ -136,6 +136,37 @@ button {
   cursor: pointer;
 }
 button:hover { opacity: .85; }
+  /* Sparkles around submit button */
+.submit-wrapper {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.sparkle {
+  position: absolute;
+  pointer-events: none;
+  color: #9a908b;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  opacity: 0;
+  animation: sparkleButton 1.2s ease-out forwards;
+}
+
+@keyframes sparkleButton {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(4px);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7) translateY(-14px);
+  }
+}
 footer {
   text-align: center;
   margin-top: 35px;
@@ -155,10 +186,10 @@ footer a { color: var(--accent); }
 
 <header>
   <div class="brand">The TS Zodiac</div>
-  <h1>The Taylor Swift<br>Zodiac Project</h1>
+  <h1>The Taylor Swift<br>Zodiac survey</h1>
   <div class="subtitle">A cosmic investigation into musical taste.</div>
   <p class="intro">
-    What does your zodiac sign say about your Taylor Swift
+    What does the zodiac say about their Taylor Swift
     favourites? We're collecting data from Swifties across
     the zodiac to find out.
   </p>
@@ -170,12 +201,12 @@ footer a { color: var(--accent); }
   <h2 class="section-title">Your birth chart</h2>
   <p class="section-description">
     Tell us a little about your astrological placements.
-    Your Sun sign is required; the others are optional.
+    Your Sun sign is required, rising and moon signs are optional.
   </p>
 
   <label for="sun">Sun sign (required)</label>
   <select id="sun" name="sun" required>
-    <option value="">Choose your Sun sign</option>
+    <option value="">select</option>
     <option>Aries</option>
     <option>Taurus</option>
     <option>Gemini</option>
@@ -192,7 +223,7 @@ footer a { color: var(--accent); }
 
   <label for="moon">Moon sign <span class="optional">(optional)</span></label>
   <select id="moon" name="moon">
-    <option value="">Choose your Moon sign</option>
+    <option value="">select</option>
     <option>Aries</option><option>Taurus</option>
     <option>Gemini</option><option>Cancer</option>
     <option>Leo</option><option>Virgo</option>
@@ -203,7 +234,7 @@ footer a { color: var(--accent); }
 
   <label for="rising">Rising sign <span class="optional">(optional)</span></label>
   <select id="rising" name="rising">
-    <option value="">Choose your Rising sign</option>
+    <option value="">select</option>
     <option>Aries</option><option>Taurus</option>
     <option>Gemini</option><option>Cancer</option>
     <option>Leo</option><option>Virgo</option>
@@ -240,7 +271,7 @@ const albums = [
     ]
   },
   {
-    name: "Fearless (Taylor's Version)",
+    name: "Fearless",
     songs: [
       "Fearless", "Fifteen", "Love Story",
       "Hey Stephen", "White Horse",
@@ -257,7 +288,7 @@ const albums = [
     ]
   },
   {
-    name: "Speak Now (Taylor's Version)",
+    name: "Speak Now",
     songs: [
       "Mine", "Sparks Fly", "Back to December",
       "Speak Now", "Dear John", "Mean",
@@ -271,7 +302,7 @@ const albums = [
     ]
   },
   {
-    name: "Red (Taylor's Version)",
+    name: "Red",
     songs: [
       "State of Grace", "Red", "Treacherous",
       "I Knew You Were Trouble", "All Too Well",
@@ -290,7 +321,7 @@ const albums = [
     ]
   },
 {
-  name: "1989 (Taylor's Version)",
+  name: "1989",
   songs: [
     "Welcome to New York",
     "Blank Space",
@@ -306,7 +337,7 @@ const albums = [
     "You Are in Love", "New Romantics",
     "Slut!", "Say Don't Go", "Now That We Don't Talk",
     "Suburban Legends", "Is It Over Now?",
-    "Bad Blood feat. Kendrick Lamar"
+    "Bad Blood (feat. Kendrick Lamar)"
     ]
   },
   {
@@ -386,7 +417,7 @@ const albums = [
     "Dear Reader",
     "Hits Different",
     "Snow On The Beach feat. More Lana Del Rey",
-    "Karma feat. Ice Spice"
+    "Karma (feat. Ice Spice)"
   ]
   },
   {
@@ -476,7 +507,7 @@ albums.forEach((album, index) => {
 
   const placeholder = document.createElement("option");
   placeholder.value = "";
-  placeholder.textContent = "Choose a song...";
+  placeholder.textContent = "select";
   select.appendChild(placeholder);
 
   album.songs.forEach(song => {
@@ -494,11 +525,33 @@ albums.forEach((album, index) => {
 });
 
   document.getElementById("surveyForm").addEventListener("submit", async function(event) {
-  event.preventDefault();
+ event.preventDefault();
+
+if (!this.reportValidity()) return;
+
+const buttonWrapper = document.querySelector(".submit-wrapper");
+
+document.querySelectorAll(".sparkle").forEach(sparkle => sparkle.remove());
+
+const sparklePositions = [
+  { top: "-12px", left: "-15px", symbol: "✦" },
+  { top: "-15px", right: "-14px", symbol: "✧" },
+  { bottom: "-10px", left: "5px", symbol: "·" },
+  { bottom: "-12px", right: "4px", symbol: "✦" }
+];
+
+sparklePositions.forEach((position, index) => {
+  const sparkle = document.createElement("span");
+  sparkle.className = "sparkle";
+  sparkle.textContent = position.symbol;
+  Object.assign(sparkle.style, position);
+  sparkle.style.animationDelay = (index * 0.12) + "s";
+  buttonWrapper.appendChild(sparkle);
+});
 
   const button = document.querySelector('button[type="submit"]');
   button.disabled = true;
-  button.textContent = "Submitting...";
+  button.textContent = "submitting...";
 
   const data = {
     sun: document.getElementById("sun").value,
@@ -525,8 +578,8 @@ albums.forEach((album, index) => {
 
   } catch (error) {
     button.disabled = false;
-    button.textContent = "Submit my answers";
-    alert("Something went wrong. Please try again.");
+    button.textContent = "submit my answers";
+    alert("something went wrong, please try again");
   }
 });
 </script>
@@ -538,9 +591,11 @@ albums.forEach((album, index) => {
     between zodiac signs and Taylor Swift song preferences.
   </p>
 
+  <div class="submit-wrapper">
   <button type="submit" form="surveyForm">
-    Submit my answers
+    submit my answers 🫶
   </button>
+</div>
 
   <p style="font-size:12px;color:#8b807b;margin-top:15px;">
     Your Sun sign is required. All other questions are optional.
@@ -550,8 +605,8 @@ albums.forEach((album, index) => {
 </form>
 
 <div id="thankYou" class="card" style="display:none;text-align:center;">
-  <h2 class="section-title">Thank you, cosmic Swiftie!</h2>
-  <p>Your answers have been received.</p>
+  <h2 class="section-title">Thank you, Swiftie!</h2>
+  <p>Your answers have been sent to the universe.</p>
   <p>May the stars guide your next Taylor Swift listening session.</p>
 </div>
 
@@ -559,7 +614,7 @@ albums.forEach((album, index) => {
   <p>The TS Zodiac</p>
   <p>
     <a href="https://thetszodiac.tumblr.com">
-      Visit us on Tumblr
+      visit us on Tumblr
     </a>
   </p>
   <p>An independent fan project. Not affiliated with Taylor Swift.</p>
