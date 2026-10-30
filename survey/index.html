@@ -205,7 +205,7 @@ footer a { color: var(--accent); }
   <h2 class="section-title">Your birth chart</h2>
   <p class="section-description">
     Tell us a little about your astrological placements.
-    Your Sun sign is required, moon/rising signs are optional.
+    Your Sun sign is required, Moon/Rising signs are optional.
   </p>
 
   <label for="sun">Sun sign <span class="required">(required)</span></label>
@@ -501,9 +501,6 @@ albums.forEach((album, index) => {
 
   const title = document.createElement("strong");
   title.textContent = number + " — " + album.name;
-
-  const description = document.createElement("p");
-  description.textContent = "Choose your favourite track";
 
   const select = document.createElement("select");
   select.name = "album_" + index;
