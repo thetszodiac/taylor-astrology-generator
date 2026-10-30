@@ -505,9 +505,6 @@ albums.forEach((album, index) => {
 
   const title = document.createElement("strong");
   title.textContent = number + " — " + album.name;
-
-  const description = document.createElement("p");
-  description.textContent = "Choose your favourite track";
   
   const select = document.createElement("select");
   select.name = "album_" + index;
@@ -526,7 +523,6 @@ albums.forEach((album, index) => {
   });
 
   info.appendChild(title);
-  info.appendChild(description);
   wrapper.appendChild(info);
   wrapper.appendChild(select);
   albumList.appendChild(wrapper);
