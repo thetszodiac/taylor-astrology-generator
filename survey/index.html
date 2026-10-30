@@ -530,7 +530,15 @@ albums.forEach((album, index) => {
   document.getElementById("surveyForm").addEventListener("submit", async function(event) {
  event.preventDefault();
 
-if (!this.reportValidity()) return;
+const sunSign = document.getElementById("sun");
+
+if (!sunSign.value) {
+  sunSign.setCustomValidity("Please select your Sun sign before submitting!");
+  sunSign.reportValidity();
+  return;
+}
+
+sunSign.setCustomValidity("");
 
 const buttonWrapper = document.querySelector(".submit-wrapper");
 
