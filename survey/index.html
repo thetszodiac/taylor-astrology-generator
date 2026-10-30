@@ -134,8 +134,7 @@ button {
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-button:hover,
-button:active {
+button.is-submitting {
   background: var(--accent);
   color: white;
 }
@@ -571,8 +570,9 @@ sparklePositions.forEach((position, index) => {
 });
 
   const button = document.querySelector('button[type="submit"]');
-  button.disabled = true;
-  button.textContent = "submitting...";
+button.classList.add("is-submitting");
+button.disabled = true;
+button.textContent = "submitting...";
 
   const data = {
     sun: document.getElementById("sun").value,
