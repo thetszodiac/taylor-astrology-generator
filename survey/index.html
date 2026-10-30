@@ -106,29 +106,12 @@ select {
   border-bottom: 1px solid var(--border);
 }
 .album-card:last-child { border-bottom: none; }
-.album-art {
-  width: 66px;
-  height: 66px;
-  border-radius: 5px;
-  background: var(--soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Georgia, serif;
-  font-size: 12px;
-  text-align: center;
-  flex-shrink: 0;
-}
+  
 .album-info { flex: 1; }
 .album-info strong {
   font-family: Georgia, serif;
   font-weight: normal;
   font-size: 16px;
-}
-.album-info p {
-  margin: 3px 0 0;
-  font-size: 12px;
-  color: var(--muted);
 }
 button {
   font-family: Georgia, serif;
@@ -497,15 +480,9 @@ const albums = [
 
 const albumList = document.getElementById("albumList");
 
-document.getElementById("sun").addEventListener("change", function() {
-  this.setCustomValidity("");
-});
-  
 albums.forEach((album, index) => {
   const wrapper = document.createElement("div");
   wrapper.className = "album-card";
-
-  const number = String(index + 1).padStart(2, "0");
 
   const info = document.createElement("div");
   info.className = "album-info";
@@ -545,8 +522,6 @@ if (!sunSign.value) {
   sunSign.focus();
   return;
 }
-
-sunSign.setCustomValidity("");
 
 const buttonWrapper = document.querySelector(".submit-wrapper");
 
