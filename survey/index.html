@@ -490,6 +490,10 @@ const albums = [
 
 const albumList = document.getElementById("albumList");
 
+document.getElementById("sun").addEventListener("change", function() {
+  this.setCustomValidity("");
+});
+  
 albums.forEach((album, index) => {
   const wrapper = document.createElement("div");
   wrapper.className = "album-card";
@@ -502,6 +506,9 @@ albums.forEach((album, index) => {
   const title = document.createElement("strong");
   title.textContent = number + " — " + album.name;
 
+  const description = document.createElement("p");
+  description.textContent = "Choose your favourite track";
+  
   const select = document.createElement("select");
   select.name = "album_" + index;
   select.setAttribute("aria-label", album.name);
