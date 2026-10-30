@@ -597,8 +597,9 @@ button.textContent = "submitting...";
     document.getElementById("surveyForm").style.display = "none";
     document.getElementById("thankYou").style.display = "block";
 
-  } catch (error) {
+    } catch (error) {
     button.disabled = false;
+    button.classList.remove("is-submitting");
     button.textContent = "submit 🫶";
     alert("Something went wrong, please try again!");
   }
