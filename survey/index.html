@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Taylor Swift Zodiac Project | The TS Zodiac</title>
+<style>
+:root {
+  --bg: #f8f5f0;
+  --card: #fffdfa;
+  --text: #4a4240;
+  --muted: #8b807b;
+  --border: #e7dfd7;
+  --accent: #9b817d;
+  --soft: #f1ebe5;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 28px 16px 60px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+.container {
+  max-width: 720px;
+  margin: auto;
+}
+header {
+  text-align: center;
+  margin-bottom: 34px;
+}
+.brand {
+  font-family: Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1, h2, h3 {
+  font-family: Georgia, serif;
+  font-weight: normal;
+}
+h1 {
+  font-size: clamp(27px, 6vw, 39px);
+  line-height: 1.2;
+  margin: 18px 0 12px;
+}
+.subtitle {
+  color: var(--muted);
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+.intro {
+  max-width: 560px;
+  margin: 20px auto 0;
+  font-size: 14px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-size: 22px;
+  margin: 0 0 5px;
+}
+.section-description {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 22px;
+}
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 16px 0 7px;
+}
+.optional {
+  color: var(--muted);
+  font-weight: normal;
+}
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: #fff;
+  color: var(--text);
+  font-size: 14px;
+}
+.progress-wrap {
+  margin: 24px 0;
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+.progress-track {
+  height: 5px;
+  background: var(--soft);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--accent);
+  transition: width .2s;
+}
+.album-card {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+}
+.album-card:last-child { border-bottom: none; }
+.album-art {
+  width: 66px;
+  height: 66px;
+  border-radius: 5px;
+  background: var(--soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, serif;
+  font-size: 12px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.album-info { flex: 1; }
+.album-info strong {
+  font-family: Georgia, serif;
+  font-weight: normal;
+  font-size: 16px;
+}
+.album-info p {
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+button {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: white;
+  padding: 13px 24px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+button:hover { opacity: .85; }
+footer {
+  text-align: center;
+  margin-top: 35px;
+  color: var(--muted);
+  font-family: Georgia, serif;
+  font-size: 12px;
+}
+footer a { color: var(--accent); }
+@media(max-width:480px) {
+  body { padding: 20px 12px 45px; }
+  .card { padding: 19px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="brand">The TS Zodiac</div>
+  <h1>The Taylor Swift<br>Zodiac Project</h1>
+  <div class="subtitle">A cosmic investigation into musical taste.</div>
+  <p class="intro">
+    What does your zodiac sign say about your Taylor Swift
+    favourites? We're collecting data from Swifties across
+    the zodiac to find out.
+  </p>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-label">
+    <span>Your survey progress</span>
+    <span id="progressText">0 of 13 albums</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+</div>
+
+<form id="surveyForm">
+
+<section class="card">
+  <h2 class="section-title">Your birth chart</h2>
+  <p class="section-description">
+    Tell us a little about your astrological placements.
+    Your Sun sign is required; the others are optional.
+  </p>
+
+  <label for="sun">Sun sign (required)</label>
+  <select id="sun" name="sun" required>
+    <option value="">Choose your Sun sign</option>
+    <option>Aries</option>
+    <option>Taurus</option>
+    <option>Gemini</option>
+    <option>Cancer</option>
+    <option>Leo</option>
+    <option>Virgo</option>
+    <option>Libra</option>
+    <option>Scorpio</option>
+    <option>Sagittarius</option>
+    <option>Capricorn</option>
+    <option>Aquarius</option>
+    <option>Pisces</option>
+  </select>
+
+  <label for="moon">Moon sign <span class="optional">(optional)</span></label>
+  <select id="moon" name="moon">
+    <option value="">Choose your Moon sign</option>
+    <option>Aries</option><option>Taurus</option>
+    <option>Gemini</option><option>Cancer</option>
+    <option>Leo</option><option>Virgo</option>
+    <option>Libra</option><option>Scorpio</option>
+    <option>Sagittarius</option><option>Capricorn</option>
+    <option>Aquarius</option><option>Pisces</option>
+  </select>
+
+  <label for="rising">Rising sign <span class="optional">(optional)</span></label>
+  <select id="rising" name="rising">
+    <option value="">Choose your Rising sign</option>
+    <option>Aries</option><option>Taurus</option>
+    <option>Gemini</option><option>Cancer</option>
+    <option>Leo</option><option>Virgo</option>
+    <option>Libra</option><option>Scorpio</option>
+    <option>Sagittarius</option><option>Capricorn</option>
+    <option>Aquarius</option><option>Pisces</option>
+  </select>
+</section>
+
+
+
+<section class="card" id="albums">
+  <h2 class="section-title">The discography</h2>
+  <p class="section-description">
+    Choose your favourite song from each album.
+    All album questions are optional.
+  </p>
+
+  <div id="albumList"></div>
+</section>
+
+<script>
+const albums = [
+  {
+    name: "Taylor Swift",
+    songs: [
+      "Tim McGraw", "Picture to Burn",
+      "Teardrops on My Guitar", "A Place in This World",
+      "Cold as You", "The Outside",
+      "Tied Together with a Smile", "Stay Beautiful",
+      "Should've Said No", "Mary's Song (Oh My My My)",
+      "Our Song", "I'm Only Me When I'm with You",
+      "Invisible", "A Perfectly Good Heart"
+    ]
+  },
+  {
+    name: "Fearless (Taylor's Version)",
+    songs: [
+      "Fearless", "Fifteen", "Love Story",
+      "Hey Stephen", "White Horse",
+      "You Belong with Me", "Breathe",
+      "Tell Me Why", "You're Not Sorry",
+      "The Way I Loved You", "Forever & Always",
+      "The Best Day", "Change",
+      "Jump Then Fall", "Untouchable",
+      "Come In with the Rain", "Superstar",
+      "The Other Side of the Door",
+      "Today Was a Fairytale", "You All Over Me",
+      "Mr. Perfectly Fine", "We Were Happy",
+      "That's When", "Don't You", "Bye Bye Baby"
+    ]
+  },
+  {
+    name: "Speak Now (Taylor's Version)",
+    songs: [
+      "Mine", "Sparks Fly", "Back to December",
+      "Speak Now", "Dear John", "Mean",
+      "The Story of Us", "Never Grow Up",
+      "Enchanted", "Better Than Revenge",
+      "Innocent", "Haunted", "Last Kiss",
+      "Long Live", "Ours", "If This Was a Movie",
+      "Superman", "Electric Touch",
+      "When Emma Falls in Love", "I Can See You",
+      "Castles Crumbling", "Foolish One", "Timeless"
+    ]
+  },
+  {
+    name: "Red (Taylor's Version)",
+    songs: [
+      "State of Grace", "Red", "Treacherous",
+      "I Knew You Were Trouble", "All Too Well",
+      "22", "I Almost Do",
+      "We Are Never Ever Getting Back Together",
+      "Stay Stay Stay", "The Last Time",
+      "Holy Ground", "Sad Beautiful Tragic",
+      "The Lucky One", "Everything Has Changed",
+      "Starlight", "Begin Again",
+      "The Moment I Knew", "Come Back... Be Here",
+      "Girl at Home", "Ronan", "Better Man",
+      "Nothing New", "Babe", "Message in a Bottle",
+      "I Bet You Think About Me", "Forever Winter",
+      "Run", "The Very First Night",
+      "All Too Well (10 Minute Version)"
+    ]
+  },
+{
+  name: "1989 (Taylor's Version)",
+  songs: [
+    "Welcome to New York",
+    "Blank Space",
+    "Style",
+    "Out of the Woods",
+    "All You Had to Do Was Stay",
+    "Shake It Off",
+    "I Wish You Would",
+    "Bad Blood",
+    "Wildest Dreams", "How You Get the Girl",
+    "This Love", "I Know Places",
+    "Clean", "Wonderland",
+    "You Are in Love", "New Romantics",
+    "Slut!", "Say Don't Go", "Now That We Don't Talk",
+    "Suburban Legends", "Is It Over Now?",
+    "Bad Blood feat. Kendrick Lamar"
+    ]
+  },
+  {
+    name: "reputation",
+    songs: [
+      "...Ready for It?", "End Game", "I Did Something Bad",
+      "Don't Blame Me", "Delicate", "Look What You Made Me Do",
+      "So It Goes...", "Gorgeous", "Getaway Car",
+      "King of My Heart", "Dancing with Our Hands Tied",
+      "Dress", "This Is Why We Can't Have Nice Things",
+      "Call It What You Want", "New Year's Day"
+    ]
+  },
+  {
+  name: "Lover",
+  songs: [
+    "I Forgot That You Existed",
+    "Cruel Summer",
+    "Lover",
+    "The Man",
+    "The Archer",
+    "I Think He Knows",
+    "Miss Americana & The Heartbreak Prince",
+    "Paper Rings",
+    "Cornelia Street", "Death by a Thousand Cuts",
+    "London Boy", "Soon You'll Get Better",
+    "False God", "You Need to Calm Down",
+    "Afterglow", "ME!", "It's Nice to Have a Friend",
+    "Daylight", "All Of The Girls You Loved Before"
+    ]
+  },
+  {
+    name: "folklore",
+    songs: [
+      "the 1", "cardigan", "the last great american dynasty",
+      "exile", "my tears ricochet", "mirrorball",
+      "seven", "august", "this is me trying",
+      "illicit affairs", "invisible string",
+      "mad woman", "epiphany", "betty",
+      "peace", "hoax", "the lakes"
+    ]
+  },
+  {
+    name: "evermore",
+    songs: [
+      "willow", "champagne problems", "gold rush",
+      "'tis the damn season", "tolerate it",
+      "no body, no crime", "happiness",
+      "dorothea", "coney island", "ivy",
+      "cowboy like me", "long story short",
+      "marjorie", "closure", "evermore",
+      "right where you left me", "it's time to go"
+    ]
+  },
+  {
+  name: "Midnights",
+  songs: [
+    "Lavender Haze",
+    "Maroon",
+    "Anti-Hero",
+    "Snow on the Beach",
+    "You're on Your Own, Kid",
+    "Midnight Rain",
+    "Question...?",
+    "Vigilante Shit",
+    "Bejeweled",
+    "Labyrinth",
+    "Karma",
+    "Sweet Nothing",
+    "Mastermind",
+    "The Great War",
+    "Bigger Than the Whole Sky",
+    "Paris",
+    "High Infidelity",
+    "Glitch",
+    "Would've, Could've, Should've",
+    "Dear Reader",
+    "Hits Different",
+    "Snow On The Beach feat. More Lana Del Rey",
+    "Karma feat. Ice Spice"
+  ]
+  },
+  {
+  name: "The Tortured Poets Department",
+  songs: [
+    "Fortnight",
+    "The Tortured Poets Department",
+    "My Boy Only Breaks His Favourite Toys",
+    "Down Bad",
+    "So Long, London",
+    "But Daddy I Love Him",
+    "Fresh Out the Slammer",
+    "Florida!!!",
+    "Guilty as Sin?",
+    "Who's Afraid of Little Old Me?",
+    "I Can Fix Him (No Really I Can)",
+    "loml",
+    "I Can Do It With a Broken Heart",
+    "The Smallest Man Who Ever Lived",
+    "The Alchemy",
+    "Clara Bow"
+  ]
+  },
+  {
+    name: "The Anthology",
+    songs: [
+      "The Black Dog",
+      "imgonnagetyouback",
+      "The Albatross",
+      "Chloe or Sam or Sophia or Marcus",
+      "How Did It End?",
+      "So High School",
+      "I Hate It Here",
+      "thanK you aIMee",
+      "I Look in People's Windows",
+      "The Prophecy",
+      "Cassandra",
+      "Peter",
+      "The Bolter",
+      "Robin",
+      "The Manuscript"
+    ]
+  },
+  {
+    name: "The Life of a Showgirl",
+    songs: [
+      "The Fate of Ophelia",
+      "Elizabeth Taylor",
+      "Opalite",
+      "Father Figure",
+      "Eldest Daughter",
+      "Ruin the Friendship",
+      "Actually Romantic",
+      "Wi$h Li$t",
+      "Wood",
+      "CANCELLED!",
+      "Honey",
+      "The Life of a Showgirl",
+      "Patient Zero",
+      "Cleveland!",
+      "Pink Clouding",
+      "Babylon"
+    ]
+  }
+];
+
+const albumList = document.getElementById("albumList");
+
+albums.forEach((album, index) => {
+  const wrapper = document.createElement("div");
+  wrapper.className = "album-card";
+
+  const number = String(index + 1).padStart(2, "0");
+
+  const info = document.createElement("div");
+  info.className = "album-info";
+
+  const title = document.createElement("strong");
+  title.textContent = number + " — " + album.name;
+
+  const description = document.createElement("p");
+  description.textContent = "Choose your favourite track";
+
+  const select = document.createElement("select");
+  select.name = "album_" + index;
+  select.setAttribute("aria-label", album.name);
+
+  const placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.textContent = "Choose a song...";
+  select.appendChild(placeholder);
+
+  album.songs.forEach(song => {
+    const option = document.createElement("option");
+    option.value = song;
+    option.textContent = song;
+    select.appendChild(option);
+  });
+
+  select.addEventListener("change", updateProgress);
+
+  info.appendChild(title);
+  info.appendChild(description);
+  wrapper.appendChild(info);
+  wrapper.appendChild(select);
+  albumList.appendChild(wrapper);
+});
+
+function updateProgress() {
+  const completed = albums.filter((album, index) => {
+    return document.querySelector('[name="album_' + index + '"]').value !== "";
+  }).length;
+
+  document.getElementById("progressText").textContent =
+    completed + " of " + albums.length + " albums";
+
+  document.getElementById("progressFill").style.width =
+    (completed / albums.length * 100) + "%";
+}
+  document.getElementById("surveyForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const button = document.querySelector('button[type="submit"]');
+  button.disabled = true;
+  button.textContent = "Submitting...";
+
+  const data = {
+    sun: document.getElementById("sun").value,
+    moon: document.getElementById("moon").value,
+    rising: document.getElementById("rising").value,
+    albums: {}
+  };
+
+  albums.forEach((album, index) => {
+    data.albums[album.name] =
+      document.querySelector('[name="album_' + index + '"]').value;
+  });
+
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbwf3jF0Phn-obwv9bLTpc6dO_yduZvdpAKkUJCB_ufRq7OARQaGrSvNTugYKHR6fQ5v/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(data)
+    });
+
+    document.getElementById("surveyForm").style.display = "none";
+    document.getElementById("thankYou").style.display = "block";
+
+  } catch (error) {
+    button.disabled = false;
+    button.textContent = "Submit my answers";
+    alert("Something went wrong. Please try again.");
+  }
+});
+</script>
+
+<div class="card" style="text-align:center;">
+  <h2 class="section-title">Ready to share your favourites?</h2>
+  <p class="section-description">
+    Your answers will help us discover the relationship
+    between zodiac signs and Taylor Swift song preferences.
+  </p>
+
+  <button type="submit" form="surveyForm">
+    Submit my answers
+  </button>
+
+  <p style="font-size:12px;color:#8b807b;margin-top:15px;">
+    Your Sun sign is required. All other questions are optional.
+  </p>
+</div>
+
+<div id="thankYou" class="card" style="display:none;text-align:center;">
+  <h2 class="section-title">Thank you, cosmic Swiftie!</h2>
+  <p>Your answers have been received.</p>
+  <p>May the stars guide your next Taylor Swift listening session.</p>
+</div>
+
+</form>
+
+<footer>
+  <p>The TS Zodiac</p>
+  <p>
+    <a href="https://thetszodiac.tumblr.com">
+      Visit us on Tumblr
+    </a>
+  </p>
+  <p>An independent fan project. Not affiliated with Taylor Swift.</p>
+</footer>
+
+</div>
+</body>
+</html>
+
+
+  
