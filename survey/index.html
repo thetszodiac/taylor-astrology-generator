@@ -1,10 +1,11 @@
-   
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>The TS Zodiac survey</title>
+
 <style>
 :root {
   --bg: #f8f5f0;
@@ -15,7 +16,11 @@
   --accent: #9b817d;
   --soft: #f1ebe5;
 }
-* { box-sizing: border-box; }
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 28px 16px 60px;
@@ -24,14 +29,17 @@ body {
   font-family: Georgia, serif;
   line-height: 1.6;
 }
+
 .container {
   max-width: 720px;
   margin: auto;
 }
+
 header {
   text-align: center;
   margin-bottom: 34px;
 }
+
 .brand {
   font-family: Georgia, serif;
   font-size: 14px;
@@ -39,136 +47,75 @@ header {
   text-transform: uppercase;
   color: var(--muted);
 }
-h1, h2, h3 {
+
+h1, h2 {
   font-family: Georgia, serif;
   font-weight: normal;
 }
+
 h1 {
   font-size: clamp(27px, 6vw, 39px);
   letter-spacing: 1.5px;
   line-height: 1.2;
   margin: 18px 0 12px;
 }
+
 .subtitle {
   color: var(--muted);
   font-family: Georgia, serif;
   font-style: italic;
 }
-.intro {
-  max-width: 560px;
-  margin: 20px auto 0;
-  font-size: 14px;
-}
+
 .card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 9px;
-  padding: 25px;
+  padding: 35px 25px;
   margin-bottom: 20px;
+  text-align: center;
 }
+
+.sparkle {
+  color: var(--accent);
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
 .section-title {
-  font-size: 22px;
-  margin: 0 0 5px;
+  font-size: 25px;
+  margin: 0 0 18px;
+  line-height: 1.3;
 }
-.section-description {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 0 0 22px;
+
+.message {
+  font-size: 15px;
+  max-width: 480px;
+  margin: 0 auto 18px;
 }
-label {
-  display: block;
-  font-size: 13px;
-  font-weight: bold;
-  margin: 16px 0 7px;
-}
-.optional {
-  color: var(--muted);
-  font-weight: normal;
-}
-.required {
-  color: var(--muted);
-  font-weight: normal;
-}
-select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  background: #fff;
-  color: var(--text);
+
+.closing {
   font-size: 14px;
-}
-.album-card {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 8px;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--border);
-}
-.album-card:last-child { border-bottom: none; }
-  
-.album-info { flex: 1; }
-.album-info strong {
-  font-family: Georgia, serif;
-  font-weight: normal;
-  font-size: 16px;
-}
-.album-lyric {
-  font-family: Georgia, serif;
-  font-size: 12px;
-  font-style: italic;
   color: var(--muted);
-  margin: 4px 0 0;
-  line-height: 1.5;
+  margin: 0 auto 25px;
 }
-button {
-  font-family: Georgia, serif;
+
+.threads-link {
+  display: inline-block;
+  color: var(--accent);
+  text-decoration: none;
   border: 1px solid var(--accent);
-  background: var(--bg);
-  color: var(--text);
-  padding: 13px 24px;
   border-radius: 5px;
+  padding: 11px 22px;
+  font-family: Georgia, serif;
   font-size: 14px;
-  cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-button.is-submitting {
+.threads-link:hover {
   background: var(--accent);
   color: white;
 }
-  
-.submit-wrapper {
-  position: relative;
-  width: fit-content;
-  margin: 0 auto;
-}
-  
-.sparkle {
-  position: absolute;
-  pointer-events: none;
-  color: #9a908b;
-  font-family: Georgia, serif;
-  font-size: 16px;
-  opacity: 0;
-  animation: sparkleButton 1.2s ease-out forwards;
-}
 
-@keyframes sparkleButton {
-  0% {
-    opacity: 0;
-    transform: scale(0.5) translateY(4px);
-  }
-  20% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.7) translateY(-14px);
-  }
-}
 footer {
   text-align: center;
   margin-top: 35px;
@@ -176,473 +123,95 @@ footer {
   font-family: Georgia, serif;
   font-size: 12px;
 }
-footer a { color: var(--accent); }
+
+footer a {
+  color: var(--accent);
+}
+
 @media(max-width:480px) {
-  body { padding: 20px 12px 45px; }
-  .card { padding: 19px; }
+  body {
+    padding: 20px 12px 45px;
+  }
+
+  .card {
+    padding: 28px 19px;
+  }
+
+  .message {
+    font-size: 14px;
+  }
 }
 </style>
 </head>
+
 <body>
+
 <div class="container">
 
 <header>
-  <div class="brand">✨The TS Zodiac✨</div>
+  <div class="brand">✨ The TS Zodiac ✨</div>
+
   <h1>The Taylor Swift<br>Zodiac survey</h1>
-  <div class="subtitle">The lingering question keeps me up...</div>
-  <p class="intro">
-    What do the signs say about their Taylor Swift
-    favourites? We're collecting data from Swifties across
-    the zodiac to find out.
-  </p>
+
+  <div class="subtitle">
+    The lingering question keeps me up...
+  </div>
 </header>
 
-<form id="surveyForm">
-
 <section class="card">
-  <h2 class="section-title">Your birth chart</h2>
-  <p class="section-description">
-    Tell us a little about your astrological placements.
-    Your Sun sign is required, Moon/Rising signs are optional.
+
+  <div class="sparkle">✧ ✦ ✧</div>
+
+  <h2 class="section-title">
+    Thank you, Swifties!
+  </h2>
+
+  <p class="message">
+    Thank you to everyone who took part in
+    the Taylor Swift × Astrology survey!
   </p>
 
-  <label for="sun">Sun sign <span class="required">(required)</span></label>
-  <select id="sun" name="sun">
-    <option value="">select</option>
-    <option>Aries</option>
-    <option>Taurus</option>
-    <option>Gemini</option>
-    <option>Cancer</option>
-    <option>Leo</option>
-    <option>Virgo</option>
-    <option>Libra</option>
-    <option>Scorpio</option>
-    <option>Sagittarius</option>
-    <option>Capricorn</option>
-    <option>Aquarius</option>
-    <option>Pisces</option>
-  </select>
+  <p class="closing">
+    This survey is now officially closed.<br>
+    I'll be sharing the results over on Threads soon!
+  </p>
 
-  <label for="moon">Moon sign <span class="optional">(optional)</span></label>
-  <select id="moon" name="moon">
-    <option value="">select</option>
-    <option>Aries</option><option>Taurus</option>
-    <option>Gemini</option><option>Cancer</option>
-    <option>Leo</option><option>Virgo</option>
-    <option>Libra</option><option>Scorpio</option>
-    <option>Sagittarius</option><option>Capricorn</option>
-    <option>Aquarius</option><option>Pisces</option>
-  </select>
+  <a
+    class="threads-link"
+    href="https://www.threads.com/@katehxlland?hpir=1&amp;http_ref=eyJ0cyI6MTc5Mzc5NjM4MDAwMCwiciI6IiJ9"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Follow along on Threads ✨
+  </a>
 
-  <label for="rising">Rising sign <span class="optional">(optional)</span></label>
-  <select id="rising" name="rising">
-    <option value="">select</option>
-    <option>Aries</option><option>Taurus</option>
-    <option>Gemini</option><option>Cancer</option>
-    <option>Leo</option><option>Virgo</option>
-    <option>Libra</option><option>Scorpio</option>
-    <option>Sagittarius</option><option>Capricorn</option>
-    <option>Aquarius</option><option>Pisces</option>
-  </select>
+  <div class="sparkle" style="margin-top:25px; margin-bottom:0;">
+    ✧
+  </div>
+
 </section>
-
-
-
-<section class="card" id="albums">
-  <h2 class="section-title">The discography</h2>
-  <p class="section-description">
-    Choose your favourite song from each of Taylor's albums.
-    All albums are optional in case you simply can't choose!
-  </p>
-
-  <div id="albumList"></div>
-</section>
-
-<script>
-const albums = [
-  {
-    name: "Taylor Swift",
-    lyric: "I’ll still look at you like the stars that shine in the sky...",
-    songs: [
-      "Tim McGraw", "Picture to Burn",
-      "Teardrops on My Guitar", "A Place in This World",
-      "Cold as You", "The Outside",
-      "Tied Together with a Smile", "Stay Beautiful",
-      "Should've Said No", "Mary's Song (Oh My My My)",
-      "Our Song", "I'm Only Me When I'm with You",
-      "Invisible", "A Perfectly Good Heart"
-    ]
-  },
-  {
-    name: "Fearless",
-    lyric: "You’ve got a smile that takes me to another planet...",
-    songs: [
-      "Fearless", "Fifteen", "Love Story",
-      "Hey Stephen", "White Horse",
-      "You Belong with Me", "Breathe",
-      "Tell Me Why", "You're Not Sorry",
-      "The Way I Loved You", "Forever & Always",
-      "The Best Day", "Change",
-      "Jump Then Fall", "Untouchable",
-      "Come In with the Rain", "Superstar",
-      "The Other Side of the Door",
-      "Today Was a Fairytale", "You All Over Me",
-      "Mr. Perfectly Fine", "We Were Happy",
-      "That's When", "Don't You", "Bye Bye Baby"
-    ]
-  },
-  {
-    name: "Speak Now",
-    lyric: "I was thinking just one time, maybe the stars align...",
-    songs: [
-      "Mine", "Sparks Fly", "Back to December",
-      "Speak Now", "Dear John", "Mean",
-      "The Story of Us", "Never Grow Up",
-      "Enchanted", "Better Than Revenge",
-      "Innocent", "Haunted", "Last Kiss",
-      "Long Live", "Ours",
-      "Superman", "Electric Touch",
-      "When Emma Falls in Love", "I Can See You",
-      "Castles Crumbling", "Foolish One", "Timeless"
-    ]
-  },
-  {
-    name: "Red",
-    lyric: "Up in your room and our slates are clean, just twin fire signs...",
-    songs: [
-      "State of Grace", "Red", "Treacherous",
-      "I Knew You Were Trouble", "All Too Well",
-      "22", "I Almost Do",
-      "We Are Never Ever Getting Back Together",
-      "Stay Stay Stay", "The Last Time",
-      "Holy Ground", "Sad Beautiful Tragic",
-      "The Lucky One", "Everything Has Changed",
-      "Starlight", "Begin Again",
-      "The Moment I Knew", "Come Back... Be Here",
-      "Girl at Home", "Ronan", "Better Man",
-      "Nothing New", "Babe", "Message in a Bottle",
-      "I Bet You Think About Me", "Forever Winter",
-      "Run", "The Very First Night",
-      "All Too Well (10 Minute Version)"
-    ]
-  },
-{
-  name: "1989",
-  lyric: "Magic, madness, heaven, sin, I could show you incredible things...",
-  songs: [
-    "Welcome to New York",
-    "Blank Space",
-    "Style",
-    "Out of the Woods",
-    "All You Had to Do Was Stay",
-    "Shake It Off",
-    "I Wish You Would",
-    "Bad Blood",
-    "Wildest Dreams", "How You Get the Girl",
-    "This Love", "I Know Places",
-    "Clean", "Wonderland",
-    "You Are in Love", "New Romantics",
-    "Slut!", "Say Don't Go", "Now That We Don't Talk",
-    "Suburban Legends", "Is It Over Now?",
-    "Bad Blood (feat. Kendrick Lamar)"
-    ]
-  },
-  {
-    name: "Reputation",
-    lyric: "Starry eyes sparking up my darkest night...",
-    songs: [
-      "...Ready for It?", "End Game", "I Did Something Bad",
-      "Don't Blame Me", "Delicate", "Look What You Made Me Do",
-      "So It Goes...", "Gorgeous", "Getaway Car",
-      "King of My Heart", "Dancing with Our Hands Tied",
-      "Dress", "This Is Why We Can't Have Nice Things",
-      "Call It What You Want", "New Year's Day"
-    ]
-  },
-  {
-  name: "Lover",
-  lyric: "Stars all aligned, and they intertwined...",
-  songs: [
-    "I Forgot That You Existed",
-    "Cruel Summer",
-    "Lover",
-    "The Man",
-    "The Archer",
-    "I Think He Knows",
-    "Miss Americana & The Heartbreak Prince",
-    "Paper Rings",
-    "Cornelia Street", "Death by a Thousand Cuts",
-    "London Boy", "Soon You'll Get Better",
-    "False God", "You Need to Calm Down",
-    "Afterglow", "ME!", "It's Nice to Have a Friend",
-    "Daylight", "All Of The Girls You Loved Before"
-    ]
-  },
-  {
-    name: "folklore",
-    lyric: "Love you to the moon and to Saturn...",
-    songs: [
-      "the 1", "cardigan", "the last great american dynasty",
-      "exile", "my tears ricochet", "mirrorball",
-      "seven", "august", "this is me trying",
-      "illicit affairs", "invisible string",
-      "mad woman", "epiphany", "betty",
-      "peace", "hoax", "the lakes"
-    ]
-  },
-  {
-    name: "evermore",
-    lyric: "You’re a bandit like me, eyes full of stars...",
-    songs: [
-      "willow", "champagne problems", "gold rush",
-      "'tis the damn season", "tolerate it",
-      "no body, no crime", "happiness",
-      "dorothea", "coney island", "ivy",
-      "cowboy like me", "long story short",
-      "marjorie", "closure", "evermore",
-      "right where you left me", "it's time to go"
-    ]
-  },
-  {
-  name: "Midnights",
-  lyric: "Once upon a time, the planets and the fates and all the stars aligned...",
-  songs: [
-    "Lavender Haze",
-    "Maroon",
-    "Anti-Hero",
-    "Snow on the Beach",
-    "You're on Your Own, Kid",
-    "Midnight Rain",
-    "Question...?",
-    "Vigilante Shit",
-    "Bejeweled",
-    "Labyrinth",
-    "Karma",
-    "Sweet Nothing",
-    "Mastermind",
-    "The Great War",
-    "Bigger Than the Whole Sky",
-    "Paris",
-    "High Infidelity",
-    "Glitch",
-    "Would've, Could've, Should've",
-    "Dear Reader",
-    "Hits Different",
-    "Snow On The Beach (feat. More Lana Del Rey)",
-    "Karma (feat. Ice Spice)",
-     "You're Losing Me"
-  ]
-  },
-  {
-  name: "The Tortured Poets Department",
-  lyric: "For a moment I knew cosmic love...",
-  songs: [
-    "Fortnight",
-    "The Tortured Poets Department",
-    "My Boy Only Breaks His Favourite Toys",
-    "Down Bad",
-    "So Long, London",
-    "But Daddy I Love Him",
-    "Fresh Out the Slammer",
-    "Florida!!!",
-    "Guilty as Sin?",
-    "Who's Afraid of Little Old Me?",
-    "I Can Fix Him (No Really I Can)",
-    "loml",
-    "I Can Do It With a Broken Heart",
-    "The Smallest Man Who Ever Lived",
-    "The Alchemy",
-    "Clara Bow"
-  ]
-  },
-  {
-    name: "The Anthology",
-    lyric: "And the stars are stunning...",
-    songs: [
-      "The Black Dog",
-      "imgonnagetyouback",
-      "The Albatross",
-      "Chloe or Sam or Sophia or Marcus",
-      "How Did It End?",
-      "So High School",
-      "I Hate It Here",
-      "thanK you aIMee",
-      "I Look in People's Windows",
-      "The Prophecy",
-      "Cassandra",
-      "Peter",
-      "The Bolter",
-      "Robin",
-      "The Manuscript"
-    ]
-  },
-  {
-    name: "The Life of a Showgirl",
-    lyric: "I made wishes on all of the stars...",
-    songs: [
-      "The Fate of Ophelia",
-      "Elizabeth Taylor",
-      "Opalite",
-      "Father Figure",
-      "Eldest Daughter",
-      "Ruin the Friendship",
-      "Actually Romantic",
-      "Wi$h Li$t",
-      "Wood",
-      "CANCELLED!",
-      "Honey",
-      "The Life of a Showgirl",
-      "Patient Zero",
-      "Cleveland!",
-      "Pink Clouding",
-      "Babylon"
-    ]
-  }
-];
-
-const albumList = document.getElementById("albumList");
-
-albums.forEach((album, index) => {
-const wrapper = document.createElement("div");
-wrapper.className = "album-card";
-
-const info = document.createElement("div");
-info.className = "album-info";
-
-const title = document.createElement("strong");
-title.textContent = "✨ " + album.name;
-
-const lyric = document.createElement("p");
-lyric.className = "album-lyric";
-lyric.textContent = album.lyric;
-
-const select = document.createElement("select");
-select.name = "album_" + index;
-select.setAttribute("aria-label", album.name);
-
-const placeholder = document.createElement("option");
-  placeholder.value = "";
-  placeholder.textContent = "select";
-  select.appendChild(placeholder);
-
-  album.songs.forEach(song => {
-    const option = document.createElement("option");
-    option.value = song;
-    option.textContent = song;
-    select.appendChild(option);
-  });
-
-  info.appendChild(title);
-info.appendChild(lyric);
-wrapper.appendChild(info);
-  wrapper.appendChild(select);
-  albumList.appendChild(wrapper);
-});
-
-  document.getElementById("surveyForm").addEventListener("submit", async function(event) {
- event.preventDefault();
-
-const sunSign = document.getElementById("sun");
-
-if (!sunSign.value) {
-  alert("Please select your Sun sign before submitting!");
-  sunSign.focus();
-  return;
-}
-
-const buttonWrapper = document.querySelector(".submit-wrapper");
-
-document.querySelectorAll(".sparkle").forEach(sparkle => sparkle.remove());
-
-const sparklePositions = [
-  { top: "-12px", left: "-15px", symbol: "✦" },
-  { top: "-15px", right: "-14px", symbol: "✧" },
-  { bottom: "-10px", left: "5px", symbol: "·" },
-  { bottom: "-12px", right: "4px", symbol: "✦" }
-];
-
-sparklePositions.forEach((position, index) => {
-  const sparkle = document.createElement("span");
-  sparkle.className = "sparkle";
-  sparkle.textContent = position.symbol;
-  Object.assign(sparkle.style, position);
-  sparkle.style.animationDelay = (index * 0.12) + "s";
-  buttonWrapper.appendChild(sparkle);
-});
-
-  const button = document.querySelector('button[type="submit"]');
-button.classList.add("is-submitting");
-button.disabled = true;
-button.textContent = "submitting...";
-
-  const data = {
-    sun: document.getElementById("sun").value,
-    moon: document.getElementById("moon").value,
-    rising: document.getElementById("rising").value,
-    albums: {}
-  };
-
-  albums.forEach((album, index) => {
-    data.albums[album.name] =
-      document.querySelector('[name="album_' + index + '"]').value;
-  });
-
-  try {
-    await fetch("https://script.google.com/macros/s/AKfycbwf3jF0Phn-obwv9bLTpc6dO_yduZvdpAKkUJCB_ufRq7OARQaGrSvNTugYKHR6fQ5v/exec", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain" },
-      body: JSON.stringify(data)
-    });
-
-    document.getElementById("surveyForm").style.display = "none";
-    document.getElementById("thankYou").style.display = "block";
-
-    } catch (error) {
-    button.disabled = false;
-    button.classList.remove("is-submitting");
-    button.textContent = "submit 🫶";
-    alert("Something went wrong, please try again!");
-  }
-});
-</script>
-
-<div class="card" style="text-align:center;">
-  <h2 class="section-title" style="font-size:18px;">Ready to share your favourites?</h2>
-<br>
-  <div class="submit-wrapper">
-  <button type="submit" form="surveyForm">
-    submit 🫶
-  </button>
-</div>
-<p style="font-size:12px; color:#8b807b; margin-top:18px; line-height:1.5;">
-  Privacy note: this survey does not ask for or record names, email addresses or locations. Responses are collected anonymously.
-</p>
-
-</div>
-
-</form>
-
-<div id="thankYou" class="card" style="display:none;text-align:center;">
-  <h2 class="section-title">Thank you, Swiftie!</h2>
-  <p>Your answers have been sent to the universe.</p>
-  <p>
-    Want to submit another response?<br>
-    <a href="https://thetszodiac.github.io/taylor-astrology-generator/survey/">
-      Take the survey again.
-    </a>
-  </p>
-</div>
 
 <footer>
-  <p>Back to <a href="https://thetszodiac.tumblr.com/" target="_blank">The TS Zodiac</a>
+
+  <p>
+    Back to
+    <a
+      href="https://thetszodiac.tumblr.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      The TS Zodiac
+    </a>
   </p>
-  <p>An independent fan project.<br>Not affiliated with Taylor Swift.</p>
+
+  <p>
+    An independent fan project.<br>
+    Not affiliated with Taylor Swift.
+  </p>
+
 </footer>
 
 </div>
+
 </body>
 </html>
-
-
-  
