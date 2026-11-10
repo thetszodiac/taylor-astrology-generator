@@ -372,7 +372,68 @@ new Sortable(albumList, {
   onEnd: updateRanks
 });
 
-document.getElementById("submitButton").addEventListener("click", () => {
+
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbwf3jF0Phn-obwv9bLTpc6dO_yduZvdpAKkUJCB_ufRq7OARQaGrSvNTugYKHR6fQ5v/exec";
+
+document.getElementById("submitButton").addEventListener("click", async () => {
+  const button = document.getElementById("submitButton");
+  const sign = document.getElementById("sunSign").value;
+  const message = document.getElementById("message");
+
+  if (!sign) {
+    message.style.display = "block";
+    message.textContent = "Please choose your Sun sign first.";
+    document.getElementById("sunSign").focus();
+    return;
+  }
+
+  const ranking = [...albumList.children].map(
+    album => album.querySelector(".album-name").textContent.trim()
+  );
+
+  if (ranking.length !== 12 || new Set(ranking).size !== 12) {
+    message.style.display = "block";
+    message.textContent = "Please rank all twelve albums.";
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Submitting your ranking...";
+
+  message.style.display = "block";
+  message.textContent = "Sending your ranking to the stars...";
+
+  const payload = {
+    submissionType: "albumRanking",
+    sunSign: sign,
+    ranking: ranking
+  };
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    message.textContent =
+      "Your ranking has been sent! Thank you for taking part in The TS Zodiac.";
+
+    button.textContent = "Ranking submitted!";
+
+  } catch (error) {
+    message.textContent =
+      "Something went wrong. Please try again.";
+
+    button.disabled = false;
+    button.textContent = "Submit my album ranking";
+  }
+});
+
   const sign = document.getElementById("sunSign").value;
   const message = document.getElementById("message");
 
