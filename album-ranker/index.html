@@ -253,7 +253,7 @@ footer a {
 
     <li class="album">
       <span class="rank">1</span>
-      <span class="album-name">Taylor Swift</span>
+      <span class="album-name">Debut</span>
       <span class="drag-handle">⠿</span>
     </li>
 
@@ -356,14 +356,17 @@ footer a {
 </div>
 
 <script>
+
 const albumList = document.getElementById("albumList");
 
+// UPDATE RANK NUMBERS
 function updateRanks() {
   [...albumList.children].forEach((album, index) => {
     album.querySelector(".rank").textContent = index + 1;
   });
 }
 
+// DRAG AND DROP
 new Sortable(albumList, {
   animation: 180,
   ghostClass: "sortable-ghost",
@@ -373,10 +376,14 @@ new Sortable(albumList, {
 });
 
 
+// GOOGLE SHEETS CONNECTION
 const SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbwf3jF0Phn-obwv9bLTpc6dO_yduZvdpAKkUJCB_ufRq7OARQaGrSvNTugYKHR6fQ5v/exec";
 
+
+// SUBMIT RANKING
 document.getElementById("submitButton").addEventListener("click", async () => {
+
   const button = document.getElementById("submitButton");
   const sign = document.getElementById("sunSign").value;
   const message = document.getElementById("message");
@@ -426,37 +433,16 @@ document.getElementById("submitButton").addEventListener("click", async () => {
     button.textContent = "Ranking submitted!";
 
   } catch (error) {
+
     message.textContent =
       "Something went wrong. Please try again.";
 
     button.disabled = false;
     button.textContent = "Submit my album ranking";
   }
+
 });
 
-  const sign = document.getElementById("sunSign").value;
-  const message = document.getElementById("message");
-
-  if (!sign) {
-    message.style.display = "block";
-    message.textContent = "Please choose your Sun sign first.";
-    document.getElementById("sunSign").focus();
-    return;
-  }
-
-  const ranking = [...albumList.children].map(
-    album => album.querySelector(".album-name").textContent
-  );
-
-  message.style.display = "block";
-  message.textContent =
-    "Your ranking is ready! Spreadsheet submission will be enabled in the next stage.";
-
-  console.log({
-    sunSign: sign,
-    ranking: ranking
-  });
-});
 </script>
 
 </body>
