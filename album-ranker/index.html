@@ -1,1 +1,403 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The TS Zodiac | Album Rankings</title>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+
+<style>
+:root {
+  --bg: #f8f5f0;
+  --card: #fffdfa;
+  --text: #4a4240;
+  --muted: #8b807b;
+  --border: #e7dfd7;
+  --accent: #9b817d;
+  --soft: #f1ebe5;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 28px 16px 60px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, serif;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 680px;
+  margin: auto;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.brand {
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+h1 {
+  font-size: clamp(28px, 6vw, 40px);
+  font-weight: normal;
+  line-height: 1.2;
+  margin: 18px 0 10px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 27px 23px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 23px;
+  font-weight: normal;
+  margin: 0 0 8px;
+}
+
+.description {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 22px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: white;
+  color: var(--text);
+  font-family: Georgia, serif;
+  font-size: 16px;
+}
+
+.album-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+}
+
+.album {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 12px;
+  margin-bottom: 9px;
+  min-height: 66px;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.album:active { cursor: grabbing; }
+
+.rank {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: var(--soft);
+  border-radius: 50%;
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.album-name {
+  flex: 1;
+  font-size: 16px;
+}
+
+.drag-handle {
+  color: var(--muted);
+  font-size: 21px;
+  padding: 0 5px;
+}
+
+.sortable-ghost {
+  opacity: 0.35;
+  background: var(--soft);
+}
+
+.sortable-chosen {
+  border-color: var(--accent);
+}
+
+.rank-note {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin: 18px 0 0;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+  background: var(--accent);
+  color: white;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+button:hover { opacity: 0.9; }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.message {
+  display: none;
+  text-align: center;
+  padding: 15px;
+  margin-top: 15px;
+  background: var(--soft);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 35px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer a {
+  color: var(--accent);
+}
+
+@media(max-width:480px) {
+  body { padding: 20px 12px 45px; }
+  .card { padding: 23px 17px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+  <div class="brand">✨ The TS Zodiac ✨</div>
+  <h1>The Taylor Swift<br>Album Rankings</h1>
+  <div class="subtitle">
+    Tell me which albums own your heart...
+  </div>
+</header>
+
+<section class="card">
+  <h2 class="section-title">Under the same stars...</h2>
+  <p class="description">
+    Every Swiftie has their favourites. But does your zodiac
+    sign have something to do with yours?
+  </p>
+
+  <label for="sunSign">What's your Sun sign?</label>
+  <select id="sunSign" required>
+    <option value="">Choose your zodiac sign...</option>
+    <option>Aries</option>
+    <option>Taurus</option>
+    <option>Gemini</option>
+    <option>Cancer</option>
+    <option>Leo</option>
+    <option>Virgo</option>
+    <option>Libra</option>
+    <option>Scorpio</option>
+    <option>Sagittarius</option>
+    <option>Capricorn</option>
+    <option>Aquarius</option>
+    <option>Pisces</option>
+  </select>
+</section>
+
+<section class="card">
+  <h2 class="section-title">Rank Taylor's albums</h2>
+  <p class="description">
+    Drag and drop the albums into your preferred order.
+    Your number one should be your absolute favourite,
+    and number twelve your least favourite.
+  </p>
+
+  <ul class="album-list" id="albumList">
+
+    <li class="album">
+      <span class="rank">1</span>
+      <span class="album-name">Taylor Swift</span>
+      <span class="drag-handle">⠿</span>
+    </li>
+
+    <li class="album">
+      <span class="rank">2</span>
+      <span class="album-name">Fearless</span>
+      <span class="drag-handle">⠿</span>
+    </li>
+
+    <li class="album">
+      <span class="rank">3</span>
+      <span class="album-name">Speak Now</span>
+      <span class="drag-handle">⠿</span>
+    </li>
+
+    <li class="album">
+      <span class="rank">4</span>
+      <span class="album-name">Red</span>
+      <span class="drag-handle">⠿</span>
+    </li>
+
+    <li class="album">
+      <span class="rank">5</span>
+      <span class="album-name">1989</span>
+      <span class="drag-handle">⠿</span>
+    </li>
+
+    <li class="album">
+      <span class="rank">6</span>
+      <span class="album-name">reputation</span>
+      <span class="drag-handle">⠿</span>
+    </li>
+
+    <li class="album">
+      <span class="rank">7</span>
+      <span class="album-name">Lover</span>
+      <span class="drag-handle">⠿</span>
+    </li>
+
+    <li class="album">
+      <span class="rank">8</span>
+      <span class="album-name">folklore</span>
+      <span class="drag-handle">⠿</span>
+    </li>
+
+    <li class="album">
+      <span class="rank">9</span>
+      <span class="album-name">evermore</span>
+      <span class="drag-handle">⠿</span>
+    </li>
+
+    <li class="album">
+      <span class="rank">10</span>
+      <span class="album-name">Midnights</span>
+      <span class="drag-handle">⠿</span>
+    </li>
+
+    <li class="album">
+      <span class="rank">11</span>
+      <span class="album-name">The Tortured Poets Department (including The Anthology)</span>
+      <span class="drag-handle">⠿</span>
+    </li>
+
+    <li class="album">
+      <span class="rank">12</span>
+      <span class="album-name">The Life of a Showgirl</span>
+      <span class="drag-handle">⠿</span>
+    </li>
+
+  </ul>
+
+  <p class="rank-note">
+    ✨ Your ranking is complete when all twelve albums are in order.
+  </p>
+</section>
+
+<section class="card">
+  <h2 class="section-title">Ready to submit?</h2>
+  <p class="description">
+    Once you're happy with your ranking, submit your choices.
+  </p>
+
+  <button id="submitButton" type="button">
+    Submit my album ranking
+  </button>
+
+  <div class="message" id="message" role="status"></div>
+</section>
+
+<footer>
+  <p>
+    Back to <a href="https://thetszodiac.tumblr.com/">The TS Zodiac</a>
+  </p>
+  <p>
+    An independent fan project.<br>
+    Not affiliated with Taylor Swift.
+  </p>
+</footer>
+
+</div>
+
+<script>
+const albumList = document.getElementById("albumList");
+
+function updateRanks() {
+  [...albumList.children].forEach((album, index) => {
+    album.querySelector(".rank").textContent = index + 1;
+  });
+}
+
+new Sortable(albumList, {
+  animation: 180,
+  ghostClass: "sortable-ghost",
+  chosenClass: "sortable-chosen",
+  handle: ".drag-handle",
+  onEnd: updateRanks
+});
+
+document.getElementById("submitButton").addEventListener("click", () => {
+  const sign = document.getElementById("sunSign").value;
+  const message = document.getElementById("message");
+
+  if (!sign) {
+    message.style.display = "block";
+    message.textContent = "Please choose your Sun sign first.";
+    document.getElementById("sunSign").focus();
+    return;
+  }
+
+  const ranking = [...albumList.children].map(
+    album => album.querySelector(".album-name").textContent
+  );
+
+  message.style.display = "block";
+  message.textContent =
+    "Your ranking is ready! Spreadsheet submission will be enabled in the next stage.";
+
+  console.log({
+    sunSign: sign,
+    ranking: ranking
+  });
+});
+</script>
+
+</body>
+</html>
+
