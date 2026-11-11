@@ -256,12 +256,58 @@ footer a {
   body { padding: 20px 12px 45px; }
   .card { padding: 23px 17px; }
 }
+
+/* THANK YOU SCREEN */
+
+.thank-you-screen {
+  display: none;
+  text-align: center;
+}
+
+.thank-you-screen .thank-you-title {
+  font-size: 28px;
+  line-height: 1.3;
+  font-weight: normal;
+  margin: 0 0 25px;
+}
+
+.thank-you-screen .thank-you-message {
+  font-size: 16px;
+  margin: 20px 0;
+}
+
+.thank-you-screen .thank-you-detail {
+  color: var(--muted);
+  margin: 25px 0;
+}
+
+.threads-link {
+  display: inline-block;
+  width: auto;
+  padding: 12px 25px;
+  margin-top: 15px;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+  text-decoration: none;
+  font-family: Georgia, serif;
+  font-size: 16px;
+}
+
+.threads-link:hover {
+  background: var(--soft);
+  opacity: 1;
+}
+
 </style>
 </head>
 
 <body>
 <div class="container">
 
+<div id="surveyContent">
+  
 <header>
   <div class="brand">✨ The TS Zodiac ✨</div>
   <h1>The Taylor Swift Zodiac<br>Album Rankings</h1>
@@ -405,7 +451,37 @@ footer a {
 <div class="message" id="submissionMessage" role="status"></div>
 
 </section>
+</div>
 
+<section class="card thank-you-screen" id="thankYouScreen">
+
+  <div class="brand">✨ THE TS ZODIAC ✨</div>
+
+  <h2 class="thank-you-title">
+    Stars all aligned, and they intertwined...
+  </h2>
+
+  <p class="thank-you-message">
+    Thank you, Swifties!
+  </p>
+
+  <p class="thank-you-detail">
+    Your album ranking has been sent to the stars.
+    <br><br>
+    I'll be sharing the results over on Threads soon!
+  </p>
+
+  <a
+    class="threads-link"
+    href="https://www.threads.com/@katehxlland"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Follow along on Threads
+  </a>
+
+</section>
+  
 <footer>
   <p>
     Back to <a href="https://thetszodiac.tumblr.com/">The TS Zodiac</a>
@@ -418,14 +494,16 @@ footer a {
 
 </div>
 
+
 <script>
 
 const albumList = document.getElementById("albumList");
 
+// ZODIAC ERROR MESSAGE
 document.getElementById("sunSign").addEventListener("change", () => {
   document.getElementById("signMessage").style.display = "none";
 });
-  
+
 // UPDATE RANK NUMBERS
 function updateRanks() {
   [...albumList.children].forEach((album, index) => {
@@ -442,19 +520,14 @@ new Sortable(albumList, {
   onEnd: updateRanks
 });
 
-
 // GOOGLE SHEETS CONNECTION
 const SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbwf3jF0Phn-obwv9bLTpc6dO_yduZvdpAKkUJCB_ufRq7OARQaGrSvNTugYKHR6fQ5v/exec";
 
-
-// SUBMIT RANKING
-
-
+// SPARKLE ANIMATION
 function animateSparkles() {
   const wrapper = document.querySelector(".submit-wrapper");
 
-  // Remove any previous sparkles
   wrapper.querySelectorAll(".sparkle").forEach(
     sparkle => sparkle.remove()
   );
@@ -482,7 +555,6 @@ function animateSparkles() {
 
     wrapper.appendChild(sparkle);
 
-    // Trigger animation
     requestAnimationFrame(() => {
       sparkle.classList.add("animate");
     });
@@ -493,10 +565,8 @@ function animateSparkles() {
   });
 }
 
-  
+// SUBMIT RANKING
 document.getElementById("submitButton").addEventListener("click", async () => {
-
-  document.getElementById("submitButton").addEventListener("click", async () => {
 
   const button = document.getElementById("submitButton");
   const sign = document.getElementById("sunSign").value;
@@ -504,69 +574,83 @@ document.getElementById("submitButton").addEventListener("click", async () => {
   const signMessage = document.getElementById("signMessage");
   const submissionMessage = document.getElementById("submissionMessage");
 
-  
-if (!sign) {
-  signMessage.style.display = "block";
-  signMessage.textContent =
-    "Please choose your zodiac sign before submitting.";
+  // CHECK ZODIAC SIGN
+  if (!sign) {
+    signMessage.style.display = "block";
+    signMessage.textContent =
+      "Please choose your zodiac sign before submitting.";
 
-  document.getElementById("sunSign").focus();
-  return;
-}
+    submissionMessage.style.display = "none";
 
-signMessage.style.display = "none";
+    document.getElementById("sunSign").focus();
+    return;
+  }
 
-const ranking = [...albumList.children].map(
-  album => album.querySelector(".album-name").textContent.trim()
-);
+  signMessage.style.display = "none";
 
-if (ranking.length !== 12 || new Set(ranking).size !== 12) {
+  // COLLECT ALBUM RANKING
+  const ranking = [...albumList.children].map(
+    album => album.querySelector(".album-name").textContent.trim()
+  );
+
+  // CHECK ALL TWELVE ALBUMS
+  if (ranking.length !== 12 || new Set(ranking).size !== 12) {
+    submissionMessage.style.display = "block";
+    submissionMessage.textContent = "Please rank all twelve albums.";
+    return;
+  }
+
+  // PREPARE SUBMISSION
+  animateSparkles();
+
+  button.disabled = true;
+  button.textContent = "Submitting...";
+
   submissionMessage.style.display = "block";
-  submissionMessage.textContent = "Please rank all twelve albums.";
-  return;
-}
+  submissionMessage.textContent = "Sending your ranking to the stars...";
 
-animateSparkles();
+  const payload = {
+    submissionType: "albumRanking",
+    sunSign: sign,
+    ranking: ranking
+  };
 
-button.disabled = true;
-button.textContent = "Submitting...";
+  // SEND TO GOOGLE SHEETS
+  try {
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
 
-submissionMessage.style.display = "block";
-submissionMessage.textContent = "Sending your ranking to the stars...";
+    // SHOW THANK YOU SCREEN
+    document.getElementById("surveyContent").style.display = "none";
 
-const payload = {
-  submissionType: "albumRanking",
-  sunSign: sign,
-  ranking: ranking
-};
+    document.getElementById("thankYouScreen").style.display = "block";
 
-try {
-  await fetch(SCRIPT_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
-    body: JSON.stringify(payload)
-  });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
 
-  submissionMessage.textContent =
-    "Sent! Thank you for taking part.";
+  } catch (error) {
 
-  button.textContent = "Ranking submitted!";
+    // RESTORE SUBMISSION IF AN ERROR OCCURS
+    submissionMessage.style.display = "block";
+    submissionMessage.textContent =
+      "Something went wrong. Please try again.";
 
-} catch (error) {
-
-  submissionMessage.textContent =
-    "Something went wrong. Please try again.";
-
-  button.disabled = false;
-  button.textContent = "Submit my album ranking";
-}
+    button.disabled = false;
+    button.textContent = "submit 🫶";
+  }
 
 });
 
 </script>
+
 
 </body>
 </html>
