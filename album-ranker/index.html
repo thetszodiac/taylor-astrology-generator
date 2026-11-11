@@ -467,14 +467,22 @@ footer a {
 
   <section class="card" style="text-align: center;">
 
-    <p class="thank-you-message">
-      Thank you, Swiftie!
-    </p>
+  <h2 class="thank-you-title">
+
+    Stars all aligned, and they intertwined...
+
+  </h2>
+
+  <p class="thank-you-message">
+
+    Thank you, Swiftie!
+
+  </p>
 
     <p class="thank-you-detail">
       Your album ranking has been sent to the stars.
-      <br><br>
-      I'll share the results soon!
+      <br>
+      I'll share the results over on Threads soon!
     </p>
 
     <a
@@ -598,6 +606,12 @@ document.getElementById("submitButton").addEventListener("click", async () => {
   const ranking = [...albumList.children].map(
     album => album.querySelector(".album-name").textContent.trim()
   );
+
+  // CHECK ALL TWELVE ALBUMS
+if (ranking.length !== 12 || new Set(ranking).size !== 12) {
+  alert("Please rank all twelve albums.");
+  return;
+}
 
   // PREPARE SUBMISSION
   animateSparkles();
