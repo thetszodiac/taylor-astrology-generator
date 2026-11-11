@@ -248,22 +248,22 @@ footer a {
 
 <header>
   <div class="brand">✨ The TS Zodiac ✨</div>
-  <h1>The Taylor Swift<br>Album Rankings</h1>
+  <h1>The Taylor Swift Zodiac<br>Album Rankings</h1>
   <div class="subtitle">
-    Tell me which albums own your heart...
+    Can I ask you a question?
   </div>
 </header>
 
 <section class="card">
-  <h2 class="section-title">Under the same stars...</h2>
+  <h2 class="section-title">It's like a million little stars spelling out your fave...</h2>
   <p class="description">
-    Every Swiftie has their favourites. But does your zodiac
-    sign have something to do with yours?
+    We've looked at Taylor's songs individually, but what does the zodiac have to say about
+    the albums as a whole? We're collecting data from Swifties to find out!
   </p>
 
-  <label for="sunSign">What's your Sun sign?</label>
+  <label for="sunSign">What's your zodiac sign?</label>
   <select id="sunSign" required>
-    <option value="">Choose your zodiac sign...</option>
+    <option value="">select</option>
     <option>Aries</option>
     <option>Taurus</option>
     <option>Gemini</option>
@@ -280,7 +280,7 @@ footer a {
 </section>
 
 <section class="card">
-  <h2 class="section-title">Rank Taylor's albums</h2>
+  <h2 class="section-title">Your ranking</h2>
   <p class="description">
     Drag and drop the albums into your preferred order.
     Your number one should be your absolute favourite,
@@ -363,15 +363,13 @@ footer a {
 
   </ul>
 
-  <p class="rank-note">
-    ✨ Your ranking is complete when all twelve albums are in order.
-  </p>
+
 </section>
 
 <section class="card">
-  <h2 class="section-title">Ready to submit?</h2>
+  <h2 class="section-title">Are you ready for it?</h2>
   <p class="description">
-    Once you're happy with your ranking, submit your choices.
+    Once you're happy with your album order, submit your choices!
   </p>
 
   <div class="submit-wrapper">
@@ -475,7 +473,7 @@ document.getElementById("submitButton").addEventListener("click", async () => {
 
   if (!sign) {
     message.style.display = "block";
-    message.textContent = "Please choose your Sun sign first.";
+    message.textContent = "Please choose your zodiac sign before submitting.";
     document.getElementById("sunSign").focus();
     return;
   }
@@ -493,7 +491,7 @@ document.getElementById("submitButton").addEventListener("click", async () => {
   animateSparkles();
 
 button.disabled = true;
-button.textContent = "Submitting your ranking...";
+button.textContent = "Submitting...";
 
   message.style.display = "block";
   message.textContent = "Sending your ranking to the stars...";
@@ -515,7 +513,7 @@ button.textContent = "Submitting your ranking...";
     });
 
     message.textContent =
-      "Your ranking has been sent! Thank you for taking part in The TS Zodiac.";
+      "Sent! Thank you for taking part.";
 
     button.textContent = "Ranking submitted!";
 
