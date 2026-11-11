@@ -187,6 +187,44 @@ button:disabled {
   font-size: 14px;
 }
 
+
+.submit-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.sparkle {
+  position: absolute;
+  pointer-events: none;
+  color: #9a908b;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  opacity: 0;
+  z-index: 5;
+}
+
+.sparkle.animate {
+  animation: sparkleButton 1.2s ease-out forwards;
+}
+
+@keyframes sparkleButton {
+  0% {
+    transform: scale(0.5) translateY(4px);
+    opacity: 0;
+  }
+
+  20% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.7) translateY(-14px);
+    opacity: 0;
+  }
+}
+
+
 footer {
   text-align: center;
   margin-top: 35px;
@@ -336,9 +374,11 @@ footer a {
     Once you're happy with your ranking, submit your choices.
   </p>
 
+  <div class="submit-wrapper">
   <button id="submitButton" type="button">
-    Submit my album ranking
+    submit 🫶
   </button>
+</div>
 
   <div class="message" id="message" role="status"></div>
 </section>
@@ -382,6 +422,51 @@ const SCRIPT_URL =
 
 
 // SUBMIT RANKING
+
+
+function animateSparkles() {
+  const wrapper = document.querySelector(".submit-wrapper");
+
+  // Remove any previous sparkles
+  wrapper.querySelectorAll(".sparkle").forEach(
+    sparkle => sparkle.remove()
+  );
+
+  const symbols = [
+    { symbol: "✦", top: "-12px", left: "-15px" },
+    { symbol: "✧", top: "-15px", right: "-14px" },
+    { symbol: "·", bottom: "-10px", left: "5px" },
+    { symbol: "✦", bottom: "-12px", right: "4px" }
+  ];
+
+  symbols.forEach((item, index) => {
+    const sparkle = document.createElement("span");
+
+    sparkle.className = "sparkle";
+    sparkle.textContent = item.symbol;
+
+    Object.assign(sparkle.style, {
+      top: item.top || "auto",
+      bottom: item.bottom || "auto",
+      left: item.left || "auto",
+      right: item.right || "auto",
+      animationDelay: `${index * 0.12}s`
+    });
+
+    wrapper.appendChild(sparkle);
+
+    // Trigger animation
+    requestAnimationFrame(() => {
+      sparkle.classList.add("animate");
+    });
+
+    sparkle.addEventListener("animationend", () => {
+      sparkle.remove();
+    });
+  });
+}
+
+  
 document.getElementById("submitButton").addEventListener("click", async () => {
 
   const button = document.getElementById("submitButton");
@@ -405,8 +490,10 @@ document.getElementById("submitButton").addEventListener("click", async () => {
     return;
   }
 
-  button.disabled = true;
-  button.textContent = "Submitting your ranking...";
+  animateSparkles();
+
+button.disabled = true;
+button.textContent = "Submitting your ranking...";
 
   message.style.display = "block";
   message.textContent = "Sending your ranking to the stars...";
