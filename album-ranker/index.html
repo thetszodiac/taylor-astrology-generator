@@ -279,8 +279,10 @@ footer a {
     the albums as a whole? We're collecting data from Swifties to find out!
   </p>
 
-  <label for="sunSign">What's your zodiac sign?</label>
-  <select id="sunSign" required>
+  <div class="message" id="signMessage" role="alert"></div>
+
+<label for="sunSign">What's your zodiac sign?</label>
+<select id="sunSign" required>
     <option value="">select</option>
     <option>Aries</option>
     <option>Taurus</option>
@@ -400,7 +402,6 @@ footer a {
   </button>
 </div>
 
-  <div class="message" id="message" role="status"></div>
 </section>
 
 <footer>
@@ -491,14 +492,18 @@ document.getElementById("submitButton").addEventListener("click", async () => {
 
   const button = document.getElementById("submitButton");
   const sign = document.getElementById("sunSign").value;
-  const message = document.getElementById("message");
+  const message = document.getElementById("signMessage");
 
   if (!sign) {
-    message.style.display = "block";
-    message.textContent = "Please choose your zodiac sign before submitting.";
-    document.getElementById("sunSign").focus();
-    return;
-  }
+  message.style.display = "block";
+  message.textContent =
+    "Please choose your zodiac sign before submitting.";
+
+  document.getElementById("sunSign").focus();
+  return;
+}
+
+message.style.display = "none";
 
   const ranking = [...albumList.children].map(
     album => album.querySelector(".album-name").textContent.trim()
