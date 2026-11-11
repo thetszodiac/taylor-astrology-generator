@@ -203,6 +203,9 @@ button:disabled {
   font-size: 14px;
 }
 
+#signMessage {
+  margin-bottom: 20px;
+}
 
 .submit-wrapper {
   position: relative;
@@ -308,6 +311,14 @@ footer a {
   background: var(--accent);
   color: white;
   opacity: 1;
+}
+
+#surveyContent section:last-child {
+  text-align: center;
+}
+
+#surveyContent section:last-child .description {
+  text-align: center;
 }
   
 </style>
@@ -620,7 +631,7 @@ if (ranking.length !== 12 || new Set(ranking).size !== 12) {
   animateSparkles();
 
   button.disabled = true;
-  button.textContent = "Submitting...";
+  button.textContent = "submitting...";
 
 
   const payload = {
