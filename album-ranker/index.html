@@ -455,8 +455,6 @@ footer a {
   </button>
 </div>
 
-<div class="message" id="submissionMessage" role="status"></div>
-
 </section>
 </div>
 
@@ -583,15 +581,12 @@ document.getElementById("submitButton").addEventListener("click", async () => {
   const sign = document.getElementById("sunSign").value;
 
   const signMessage = document.getElementById("signMessage");
-  const submissionMessage = document.getElementById("submissionMessage");
 
   // CHECK ZODIAC SIGN
   if (!sign) {
     signMessage.style.display = "block";
     signMessage.textContent =
       "Please choose your zodiac sign before submitting.";
-
-    submissionMessage.style.display = "none";
 
     document.getElementById("sunSign").focus();
     return;
@@ -604,21 +599,12 @@ document.getElementById("submitButton").addEventListener("click", async () => {
     album => album.querySelector(".album-name").textContent.trim()
   );
 
-  // CHECK ALL TWELVE ALBUMS
-  if (ranking.length !== 12 || new Set(ranking).size !== 12) {
-    submissionMessage.style.display = "block";
-    submissionMessage.textContent = "Please rank all twelve albums.";
-    return;
-  }
-
   // PREPARE SUBMISSION
   animateSparkles();
 
   button.disabled = true;
   button.textContent = "Submitting...";
 
-  submissionMessage.style.display = "block";
-  submissionMessage.textContent = "Sending your ranking to the stars...";
 
   const payload = {
     submissionType: "albumRanking",
@@ -650,12 +636,10 @@ document.getElementById("submitButton").addEventListener("click", async () => {
   } catch (error) {
 
     // RESTORE SUBMISSION IF AN ERROR OCCURS
-    submissionMessage.style.display = "block";
-    submissionMessage.textContent =
-      "Something went wrong. Please try again.";
+    alert("Something went wrong. Please try again.");
 
-    button.disabled = false;
-    button.textContent = "submit 🫶";
+button.disabled = false;
+button.textContent = "submit 🫶";
   }
 
 });
