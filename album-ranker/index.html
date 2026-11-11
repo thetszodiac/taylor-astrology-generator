@@ -402,6 +402,8 @@ footer a {
   </button>
 </div>
 
+<div class="message" id="submissionMessage" role="status"></div>
+
 </section>
 
 <footer>
@@ -420,6 +422,10 @@ footer a {
 
 const albumList = document.getElementById("albumList");
 
+document.getElementById("sunSign").addEventListener("change", () => {
+  document.getElementById("signMessage").style.display = "none";
+});
+  
 // UPDATE RANK NUMBERS
 function updateRanks() {
   [...albumList.children].forEach((album, index) => {
@@ -490,68 +496,73 @@ function animateSparkles() {
   
 document.getElementById("submitButton").addEventListener("click", async () => {
 
+  document.getElementById("submitButton").addEventListener("click", async () => {
+
   const button = document.getElementById("submitButton");
   const sign = document.getElementById("sunSign").value;
-  const message = document.getElementById("signMessage");
 
-  if (!sign) {
-  message.style.display = "block";
-  message.textContent =
+  const signMessage = document.getElementById("signMessage");
+  const submissionMessage = document.getElementById("submissionMessage");
+
+  
+if (!sign) {
+  signMessage.style.display = "block";
+  signMessage.textContent =
     "Please choose your zodiac sign before submitting.";
 
   document.getElementById("sunSign").focus();
   return;
 }
 
-message.style.display = "none";
+signMessage.style.display = "none";
 
-  const ranking = [...albumList.children].map(
-    album => album.querySelector(".album-name").textContent.trim()
-  );
+const ranking = [...albumList.children].map(
+  album => album.querySelector(".album-name").textContent.trim()
+);
 
-  if (ranking.length !== 12 || new Set(ranking).size !== 12) {
-    message.style.display = "block";
-    message.textContent = "Please rank all twelve albums.";
-    return;
-  }
+if (ranking.length !== 12 || new Set(ranking).size !== 12) {
+  submissionMessage.style.display = "block";
+  submissionMessage.textContent = "Please rank all twelve albums.";
+  return;
+}
 
-  animateSparkles();
+animateSparkles();
 
 button.disabled = true;
 button.textContent = "Submitting...";
 
-  message.style.display = "block";
-  message.textContent = "Sending your ranking to the stars...";
+submissionMessage.style.display = "block";
+submissionMessage.textContent = "Sending your ranking to the stars...";
 
-  const payload = {
-    submissionType: "albumRanking",
-    sunSign: sign,
-    ranking: ranking
-  };
+const payload = {
+  submissionType: "albumRanking",
+  sunSign: sign,
+  ranking: ranking
+};
 
-  try {
-    await fetch(SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify(payload)
-    });
+try {
+  await fetch(SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify(payload)
+  });
 
-    message.textContent =
-      "Sent! Thank you for taking part.";
+  submissionMessage.textContent =
+    "Sent! Thank you for taking part.";
 
-    button.textContent = "Ranking submitted!";
+  button.textContent = "Ranking submitted!";
 
-  } catch (error) {
+} catch (error) {
 
-    message.textContent =
-      "Something went wrong. Please try again.";
+  submissionMessage.textContent =
+    "Something went wrong. Please try again.";
 
-    button.disabled = false;
-    button.textContent = "Submit my album ranking";
-  }
+  button.disabled = false;
+  button.textContent = "Submit my album ranking";
+}
 
 });
 
