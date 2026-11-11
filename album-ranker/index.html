@@ -75,7 +75,7 @@ h1 {
 
 
 .smaller-heading {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.4;
 }
 
@@ -181,7 +181,7 @@ button {
   display: block;
   width: fit-content;
   max-width: 100%;
-  margin: 15px auto 0;
+  margin: 0;
   padding: 14px 38px;
 }
 
@@ -206,7 +206,9 @@ button:disabled {
 
 .submit-wrapper {
   position: relative;
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
+  margin: 15px auto 0;
 }
 
 .sparkle {
@@ -264,6 +266,11 @@ footer a {
   text-align: center;
 }
 
+.thank-you-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .thank-you-screen .thank-you-title {
   font-size: 28px;
   line-height: 1.3;
@@ -312,7 +319,7 @@ footer a {
   <div class="brand">✨ The TS Zodiac ✨</div>
   <h1>The Taylor Swift Zodiac<br>Album Rankings</h1>
   <div class="subtitle">
-    It's like a million little stars spelling out your fave...
+    It's like a million little stars<br>spelling out your fave...
   </div>
 </header>
 
@@ -453,34 +460,38 @@ footer a {
 </section>
 </div>
 
-<section class="card thank-you-screen" id="thankYouScreen">
 
-  <div class="brand">✨ THE TS ZODIAC ✨</div>
+<div class="thank-you-screen" id="thankYouScreen">
 
-  <h2 class="thank-you-title">
-    Stars all aligned, and they intertwined...
-  </h2>
+  <header class="thank-you-header">
+    <div class="brand">✨ THE TS ZODIAC ✨</div>
+  </header>
 
-  <p class="thank-you-message">
-    Thank you, Swifties!
-  </p>
+  <section class="card" style="text-align: center;">
 
-  <p class="thank-you-detail">
-    Your album ranking has been sent to the stars.
-    <br><br>
-    I'll be sharing the results over on Threads soon!
-  </p>
+    <p class="thank-you-message">
+      Thank you, Swiftie!
+    </p>
 
-  <a
-    class="threads-link"
-    href="https://www.threads.com/@katehxlland"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Follow along on Threads
-  </a>
+    <p class="thank-you-detail">
+      Your album ranking has been sent to the stars.
+      <br><br>
+      I'll share the results soon!
+    </p>
 
-</section>
+    <a
+      class="threads-link"
+      href="https://www.threads.com/@katehxlland"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Follow along on Threads
+    </a>
+
+  </section>
+
+</div>
+
   
 <footer>
   <p>
